@@ -1,17 +1,51 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title>
-      Tab 2
-    </ion-title>
+      <img src="assets/imgs/logo.png" alt="Product 1" class="logo"/>
+    </ion-title> 
+    <ion-buttons slot="secondary">
+      <ion-button routerLink="/perfil">
+        <ion-icon slot="icon-only" name="person-circle-outline" size="large"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Tab 2</ion-title>
-    </ion-toolbar>
-  </ion-header>
-
-  <app-explore-container name="Tab 2 page"></app-explore-container>
+  <ion-grid>
+    <ion-row>
+      <ion-searchbar placeholder="Buscar productos..."></ion-searchbar><br>
+      <app-card producname="Aromatizante Lavanda" descripcion="Aromatizante en spray con esencia de lavanda." [precio]="50.00"></app-card>
+      <app-card producname="Aromatizante Cítrico" descripcion="Ambientador con fragancia a cítricos." [precio]="55.00"></app-card>
+      <app-card producname="Aromatizante Vainilla" descripcion="Perfume ambiental con aroma a vainilla." [precio]="60.00"></app-card>
+      <app-card producname="Aromatizante Floral" descripcion="Fragancia en spray con esencias florales." [precio]="58.00"></app-card>
+      <app-card producname="Aromatizante Manzana Canela" descripcion="Esencia con un toque dulce y especiado." [precio]="62.00"></app-card>
+      <app-card producname="Jabón Líquido Antibacterial" descripcion="Jabón líquido con propiedades antibacteriales." [precio]="45.00"></app-card>
+      <app-card producname="Jabón Líquido Neutro" descripcion="Jabón sin fragancia para piel sensible." [precio]="40.00"></app-card>
+      <app-card producname="Jabón Líquido Coco" descripcion="Jabón suave con aroma a coco." [precio]="48.00"></app-card>
+      <app-card producname="Jabón Líquido Almendra" descripcion="Hidratante con fragancia a almendra." [precio]="50.00"></app-card>
+      <app-card producname="Jabón Líquido Aloe Vera" descripcion="Refrescante y suave con aloe vera." [precio]="52.00"></app-card>
+      <app-card producname="Cloro Espumoso" descripcion="Desinfectante de alto poder con espuma activa." [precio]="70.00"></app-card>
+      <app-card producname="Cloro Concentrado" descripcion="Blanqueador y desinfectante multiusos." [precio]="65.00"></app-card>
+      <app-card producname="Desinfectante Multiusos" descripcion="Limpia y elimina bacterias en múltiples superficies." [precio]="75.00"></app-card>
+      <app-card producname="Desinfectante en Aerosol" descripcion="Fácil aplicación y rápida desinfección." [precio]="80.00"></app-card>
+      <app-card producname="Desengrasante Industrial" descripcion="Elimina la grasa más difícil en cocinas y talleres." [precio]="85.00"></app-card>
+      <app-card producname="Limpiador de Vidrios" descripcion="Deja los vidrios impecables y sin marcas." [precio]="45.00"></app-card>
+      <app-card producname="Limpiador Multiusos" descripcion="Ideal para cualquier superficie." [precio]="50.00"></app-card>
+      <app-card producname="Limpiador para Baños" descripcion="Remueve sarro y desinfecta en profundidad." [precio]="55.00"></app-card>
+      <app-card producname="Limpiador para Pisos" descripcion="Deja los pisos brillantes y con aroma fresco." [precio]="60.00"></app-card>
+      <app-card producname="Detergente Líquido" descripcion="Fórmula potente para ropa limpia y fresca." [precio]="75.00"></app-card>
+      <app-card producname="Detergente en Polvo" descripcion="Rinde más y deja la ropa impecable." [precio]="70.00"></app-card>
+      <app-card producname="Suavizante para Ropa" descripcion="Deja la ropa suave y con fragancia duradera." [precio]="65.00"></app-card>
+      <app-card producname="Cera para Pisos" descripcion="Protege y da brillo a cualquier tipo de piso." [precio]="55.00"></app-card>
+      <app-card producname="Limpiador de Muebles" descripcion="Nutre y protege la madera y superficies delicadas." [precio]="50.00"></app-card>
+      <app-card producname="Gel Antibacterial" descripcion="Mata el 99.9% de bacterias sin necesidad de agua." [precio]="40.00"></app-card>
+      <app-card producname="Pasta para Pulir Metales" descripcion="Devuelve el brillo a objetos metálicos." [precio]="60.00"></app-card>
+      <app-card producname="Removedor de Sarro" descripcion="Elimina manchas difíciles en baños y cocinas." [precio]="70.00"></app-card>
+      <app-card producname="Lavatrastes Líquido" descripcion="Desengrasa y cuida tus manos." [precio]="45.00"></app-card>
+      <app-card producname="Espuma Limpiadora para Tapicería" descripcion="Elimina manchas y suciedad en telas y alfombras." [precio]="80.00"></app-card>
+      <app-card producname="Limpiador de Acero Inoxidable" descripcion="Da brillo y protege contra manchas y huellas." [precio]="65.00"></app-card>
+    </ion-row>
+  </ion-grid>
 </ion-content>

@@ -1,0 +1,41 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>
+      <img src="assets/imgs/logo.png" alt="Product 1" class="logo"/>
+    </ion-title> 
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <div class="container">
+    <div class="screen">
+      <div class="screen__content">
+        <form class="login">
+          <h1>Bienvenido !</h1><br>
+          <p>Ingresa tus datos para iniciar sesión</p><br>
+          <div class="login__field">
+            <ion-icon name="person-outline" size="large"></ion-icon>
+            <input type="text" [(ngModel)]="email" name="email" class="login__input" placeholder="Correo Electrónico" required maxlength="25">
+          </div>
+          <div class="login__field">
+            <ion-icon name="lock-closed-outline" size="large"></ion-icon>
+            <input type="password" [(ngModel)]="password" name="password" class="login__input" placeholder="Contraseña" required maxlength="15">
+          </div>
+          <button class="button login__submit" (click)="login()">
+            <span class="button__text">Iniciar sesión</span>
+            <ion-icon class="button__icon" name="chevron-forward-sharp" size="large"></ion-icon>
+          </button>        
+        </form><br>
+        <div class="links"><br><br>
+          <a href="/registro" class="link">¿No tienes cuenta? Regístrate</a>
+        </div>
+      </div>
+      <div class="screen__background">
+        <span class="screen__background__shape screen__background__shape4"></span>
+        <span class="screen__background__shape screen__background__shape3"></span>    
+        <span class="screen__background__shape screen__background__shape2"></span>
+        <span class="screen__background__shape screen__background__shape1"></span>
+      </div>    
+    </div>
+  </div>
+</ion-content>

@@ -1,0 +1,29 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Comprobante de Compra</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>¡Gracias por tu compra, {{ customer.name }}!</ion-card-title>
+    </ion-card-header>
+
+    <ion-card-content>
+      <p>Hemos enviado el comprobante a <strong>{{ customer.email }}</strong></p>
+      <h3>Productos:</h3>
+      <ion-list>
+        <ion-item *ngFor="let item of cart">
+          <ion-label>
+            <h2>{{ item.name }}</h2>
+            <p>${{ item.price }}</p>
+          </ion-label>
+        </ion-item>
+      </ion-list>
+      <h3>Total: ${{ total }}</h3>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-button expand="full" color="primary" routerLink="/tabs/tab1">Volver al Inicio</ion-button>
+</ion-content>

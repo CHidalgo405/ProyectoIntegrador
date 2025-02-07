@@ -1,0 +1,23 @@
+<ion-col>
+  <ion-card>
+    <img src="assets/imgs/producto_6.jpg" alt="Product 1"  />
+    <ion-card-content>
+      <h2>{{producname}}</h2>
+      <p>{{descripcion}}</p>
+      <p>
+        <ion-icon name="star"></ion-icon>
+        <ion-icon name="star"></ion-icon>
+        <ion-icon name="star"></ion-icon>
+        <ion-icon name="star"></ion-icon>
+        <ion-icon name="star-half"></ion-icon>
+      </p>
+      <ion-item>
+        <h6>$ {{precio}}</h6>
+        <ion-button slot="end" size="default" (click)="addToCart()">
+          <ion-icon name="cart"></ion-icon>
+        </ion-button>
+      </ion-item>
+    </ion-card-content>
+  </ion-card>
+</ion-col>
+
