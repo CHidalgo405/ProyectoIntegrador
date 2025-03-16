@@ -1,0 +1,85 @@
+<ion-header>
+  <ion-toolbar class="toolbar-fondo">
+    <ion-title class="titulo-centrado" routerLink="/tabs/tab1">POWER CLEAN</ion-title> 
+    <ion-buttons slot="start">
+      <ion-button routerLink="/perfil">
+        <ion-icon class="perfil" slot="icon-only" name="person-circle-outline" size="large"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button (click)="closeModal()">
+        <ion-icon color="primary" size="large" name="arrow-back-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title class="titulo-secundario">{{producname}}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="content"><br>
+  <img class="imagen" [src]="imagen" alt="{{producname}}" />
+  <h1>{{producname}}</h1>
+  <p>
+    <ion-icon class="estrellas" name="star"></ion-icon>
+    <ion-icon class="estrellas" name="star"></ion-icon>
+    <ion-icon class="estrellas" name="star"></ion-icon>
+    <ion-icon class="estrellas" name="star"></ion-icon>
+    <ion-icon class="estrellas" name="star-half"></ion-icon>
+  </p>
+  <h3>Descripción:</h3>
+  <p>{{descripcion}}</p>
+  <h3>Reseñas:</h3>
+  <ion-list [inset]="true">
+
+    <ion-item class="item" detail="false">
+      <ion-label>
+        <strong>Papa Francisco segundo</strong><br>
+        <ion-text>Muy buenos productos, el Vaticano quedo muy limpio</ion-text><br />
+        <ion-note color="medium" class="ion-text-wrap">
+          <ion-icon class="estrellas" name="star"></ion-icon>
+          <ion-icon class="estrellas" name="star"></ion-icon>
+          <ion-icon class="estrellas" name="star"></ion-icon>
+          <ion-icon class="estrellas" name="star"></ion-icon>
+          <ion-icon class="estrellas" name="star-half"></ion-icon>
+        </ion-note>
+      </ion-label>
+      <div class="metadata-end-wrapper" slot="end">
+        <ion-note color="medium">21/01/2025</ion-note>
+      </div>
+    </ion-item><br>
+
+    <ion-item class="item" detail="false">
+      <ion-label>
+        <strong>Don Beto</strong><br>
+        <ion-text>Buenos productos</ion-text><br />
+        <ion-note color="medium" class="ion-text-wrap">
+          <ion-icon class="estrellas" name="star"></ion-icon>
+          <ion-icon class="estrellas" name="star"></ion-icon>
+          <ion-icon class="estrellas" name="star"></ion-icon>
+          <ion-icon class="estrellas" name="star"></ion-icon>
+          <ion-icon class="estrellas" name="star"></ion-icon>
+        </ion-note>
+      </ion-label>
+      <div class="metadata-end-wrapper" slot="end">
+        <ion-note color="medium">16/12/2024</ion-note>
+      </div>
+    </ion-item><br>
+  </ion-list>
+  </div>
+</ion-content>
+
+<ion-footer><br>
+  <ion-row>
+    <div class="div-total1">
+      <h1 class="precio">$ {{precio}}</h1>
+    </div>
+    <div class="div-total2">
+      <ion-button class="boton" slot="end" size="default" (click)="addToCart($event)">
+        Agregar al carrito
+        <ion-icon class="icon-boton" name="cart"></ion-icon>
+      </ion-button>
+    </div>
+  </ion-row><br>
+</ion-footer>

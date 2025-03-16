@@ -1,51 +1,55 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>
-      <img src="assets/imgs/logo.png" alt="Product 1" class="logo"/>
-    </ion-title> 
-    <ion-buttons slot="secondary">
+<ion-header>
+  <ion-toolbar class="toolbar-fondo">
+    <ion-title class="titulo-centrado" routerLink="/tabs">POWER CLEAN</ion-title> 
+    <ion-buttons slot="start">
       <ion-button routerLink="/perfil">
-        <ion-icon slot="icon-only" name="person-circle-outline" size="large"></ion-icon>
+        <ion-icon class="perfil" slot="icon-only" name="person-circle-outline" size="large"></ion-icon>
       </ion-button>
     </ion-buttons>
-
+  </ion-toolbar>
+  <ion-toolbar>
+    <ion-searchbar show-cancel-button="focus" placeholder="Buscar productos ..." ></ion-searchbar>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
   <ion-grid>
     <ion-row>
-      <ion-searchbar placeholder="Buscar productos..."></ion-searchbar><br>
-      <app-card producname="Aromatizante Lavanda" descripcion="Aromatizante en spray con esencia de lavanda." [precio]="50.00"></app-card>
-      <app-card producname="Aromatizante Cítrico" descripcion="Ambientador con fragancia a cítricos." [precio]="55.00"></app-card>
-      <app-card producname="Aromatizante Vainilla" descripcion="Perfume ambiental con aroma a vainilla." [precio]="60.00"></app-card>
-      <app-card producname="Aromatizante Floral" descripcion="Fragancia en spray con esencias florales." [precio]="58.00"></app-card>
-      <app-card producname="Aromatizante Manzana Canela" descripcion="Esencia con un toque dulce y especiado." [precio]="62.00"></app-card>
-      <app-card producname="Jabón Líquido Antibacterial" descripcion="Jabón líquido con propiedades antibacteriales." [precio]="45.00"></app-card>
-      <app-card producname="Jabón Líquido Neutro" descripcion="Jabón sin fragancia para piel sensible." [precio]="40.00"></app-card>
-      <app-card producname="Jabón Líquido Coco" descripcion="Jabón suave con aroma a coco." [precio]="48.00"></app-card>
-      <app-card producname="Jabón Líquido Almendra" descripcion="Hidratante con fragancia a almendra." [precio]="50.00"></app-card>
-      <app-card producname="Jabón Líquido Aloe Vera" descripcion="Refrescante y suave con aloe vera." [precio]="52.00"></app-card>
-      <app-card producname="Cloro Espumoso" descripcion="Desinfectante de alto poder con espuma activa." [precio]="70.00"></app-card>
-      <app-card producname="Cloro Concentrado" descripcion="Blanqueador y desinfectante multiusos." [precio]="65.00"></app-card>
-      <app-card producname="Desinfectante Multiusos" descripcion="Limpia y elimina bacterias en múltiples superficies." [precio]="75.00"></app-card>
-      <app-card producname="Desinfectante en Aerosol" descripcion="Fácil aplicación y rápida desinfección." [precio]="80.00"></app-card>
-      <app-card producname="Desengrasante Industrial" descripcion="Elimina la grasa más difícil en cocinas y talleres." [precio]="85.00"></app-card>
-      <app-card producname="Limpiador de Vidrios" descripcion="Deja los vidrios impecables y sin marcas." [precio]="45.00"></app-card>
-      <app-card producname="Limpiador Multiusos" descripcion="Ideal para cualquier superficie." [precio]="50.00"></app-card>
-      <app-card producname="Limpiador para Baños" descripcion="Remueve sarro y desinfecta en profundidad." [precio]="55.00"></app-card>
-      <app-card producname="Limpiador para Pisos" descripcion="Deja los pisos brillantes y con aroma fresco." [precio]="60.00"></app-card>
-      <app-card producname="Detergente Líquido" descripcion="Fórmula potente para ropa limpia y fresca." [precio]="75.00"></app-card>
-      <app-card producname="Detergente en Polvo" descripcion="Rinde más y deja la ropa impecable." [precio]="70.00"></app-card>
-      <app-card producname="Suavizante para Ropa" descripcion="Deja la ropa suave y con fragancia duradera." [precio]="65.00"></app-card>
-      <app-card producname="Cera para Pisos" descripcion="Protege y da brillo a cualquier tipo de piso." [precio]="55.00"></app-card>
-      <app-card producname="Limpiador de Muebles" descripcion="Nutre y protege la madera y superficies delicadas." [precio]="50.00"></app-card>
-      <app-card producname="Gel Antibacterial" descripcion="Mata el 99.9% de bacterias sin necesidad de agua." [precio]="40.00"></app-card>
-      <app-card producname="Pasta para Pulir Metales" descripcion="Devuelve el brillo a objetos metálicos." [precio]="60.00"></app-card>
-      <app-card producname="Removedor de Sarro" descripcion="Elimina manchas difíciles en baños y cocinas." [precio]="70.00"></app-card>
-      <app-card producname="Lavatrastes Líquido" descripcion="Desengrasa y cuida tus manos." [precio]="45.00"></app-card>
-      <app-card producname="Espuma Limpiadora para Tapicería" descripcion="Elimina manchas y suciedad en telas y alfombras." [precio]="80.00"></app-card>
-      <app-card producname="Limpiador de Acero Inoxidable" descripcion="Da brillo y protege contra manchas y huellas." [precio]="65.00"></app-card>
+      <app-card *ngFor="let producto of productos" [imagen]="producto.imagen" [producname]="producto.producname" [descripcion]="producto.descripcion" [precio]="producto.precio"></app-card>
     </ion-row>
   </ion-grid>
+  <ion-infinite-scroll threshold="300px" (ionInfinite)="loadMore($event)">
+    <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Cargando más productos..."></ion-infinite-scroll-content>
+  </ion-infinite-scroll>
 </ion-content>
+
+
+<!--
+      <app-card imagen="/assets/imgs/producto_9.jpg" producname="Jabón Líquido Antibacterial" descripcion="Jabón líquido con propiedades antibacteriales, ideal para una limpieza profunda y efectiva. Formulado para eliminar gérmenes y bacterias sin resecar la piel, proporcionando una sensación de frescura y protección." [precio]="45.00"></app-card>
+      <app-card imagen="/assets/imgs/producto_10.jpg" producname="Jabón Líquido Neutro" descripcion="Jabón sin fragancia especialmente diseñado para pieles sensibles. Su fórmula suave ayuda a mantener el equilibrio natural de la piel, evitando irritaciones y ofreciendo una limpieza delicada y efectiva." [precio]="40.00"></app-card>
+      <app-card imagen="/assets/imgs/producto_11.jpg" producname="Jabón Líquido Coco" descripcion="Jabón líquido con una fórmula suave y cremosa que limpia profundamente mientras deja la piel hidratada. Su delicioso aroma a coco brinda una experiencia refrescante y tropical en cada uso." [precio]="48.00"></app-card>
+      <app-card imagen="/assets/imgs/producto_12.jpg" producname="Jabón Líquido Almendra" descripcion="Hidratante con fragancia a almendra que proporciona una limpieza delicada y nutritiva. Su fórmula con extracto de almendra deja la piel suave, tersa y con un agradable aroma dulce y envolvente." [precio]="50.00"></app-card>
+
+      <app-card imagen="/assets/imgs/producto_5.jpg" producname="Aromatizante Lavanda" descripcion="Aromatizante en spray con esencia de lavanda, ideal para crear un ambiente relajante y armonioso. Su fragancia duradera ayuda a neutralizar olores y proporciona una sensación de tranquilidad y bienestar." [precio]="50.00"></app-card>
+      <app-card imagen="/assets/imgs/producto_6.jpg" producname="Aromatizante Cítrico" descripcion="Ambientador con fragancia a cítricos que refresca y revitaliza cualquier espacio. Su mezcla de notas de limón, naranja y mandarina ayuda a eliminar malos olores y deja un ambiente limpio y energizante." [precio]="55.00"></app-card>
+      <app-card imagen="/assets/imgs/producto_7.jpg" producname="Aromatizante Vainilla" descripcion="Perfume ambiental con aroma a vainilla que envuelve tu hogar u oficina con una fragancia dulce y reconfortante. Su fórmula en spray permite una aplicación fácil y uniforme, dejando un ambiente cálido y acogedor." [precio]="60.00"></app-card>
+      <app-card imagen="/assets/imgs/producto_8.jpg" producname="Aromatizante Floral" descripcion="Fragancia en spray con esencias florales que transforman cualquier espacio en un jardín perfumado. Su fórmula ayuda a eliminar malos olores y proporciona una sensación de frescura y naturalidad." [precio]="58.00"></app-card>
+      
+      <app-card imagen="/assets/imgs/producto_1.jpg" producname="Cloro Espumoso" descripcion="Desinfectante de alto poder con espuma activa que facilita la limpieza y desinfección de diversas superficies. Su fórmula elimina gérmenes, bacterias y hongos, dejando un ambiente higiénico y seguro." [precio]="70.00"></app-card>
+      <app-card imagen="/assets/imgs/producto_2.jpg" producname="Cloro Concentrado" descripcion="Blanqueador y desinfectante multiusos con una fórmula de alta concentración para una limpieza efectiva. Ideal para eliminar manchas difíciles y desinfectar superficies con máxima eficiencia." [precio]="65.00"></app-card>
+      <app-card imagen="/assets/imgs/producto_3.jpg" producname="Desinfectante Multiusos" descripcion="Limpia y elimina bacterias en múltiples superficies con una fórmula efectiva y de rápida acción. Perfecto para la desinfección del hogar, oficinas y áreas de alto contacto, dejando un ambiente fresco y seguro." [precio]="75.00"></app-card>
+      <app-card imagen="/assets/imgs/producto_4.jpg" producname="Desinfectante en Aerosol" descripcion="Fácil aplicación y rápida desinfección en cualquier espacio. Su fórmula en aerosol permite una distribución uniforme para eliminar virus, bacterias y malos olores, dejando un ambiente limpio y protegido." [precio]="80.00"></app-card>
+
+      <app-card imagen="/assets/imgs/producto_9.jpg" producname="Jabón Líquido Aloe Vera" descripcion="Jabón líquido enriquecido con extracto de aloe vera, ideal para hidratar y suavizar la piel. Su fórmula suave y refrescante limpia profundamente sin resecar, dejando una sensación de frescura y confort." [precio]="52.00"></app-card>
+      <app-card imagen="/assets/imgs/producto_10.jpg" producname="Jabón Líquido Lavanda" descripcion="Jabón líquido con un relajante aroma a lavanda. Su fórmula especial ayuda a calmar la piel y proporciona una experiencia de limpieza placentera con una fragancia duradera." [precio]="50.00"></app-card>
+<app-card imagen="/assets/imgs/producto_11.jpg" producname="Jabón Líquido Miel y Avena" descripcion="Jabón hidratante con extracto de miel y avena, ideal para pieles secas y sensibles. Su fórmula cremosa nutre la piel, dejándola suave, tersa y con un aroma natural y dulce." [precio]="55.00"></app-card>
+<app-card imagen="/assets/imgs/producto_12.jpg" producname="Aromatizante Frutos Rojos" descripcion="Aromatizante en spray con un dulce y afrutado aroma a frutos rojos. Ideal para refrescar y ambientar cualquier espacio con una fragancia intensa y duradera." [precio]="60.00"></app-card>
+<app-card imagen="/assets/imgs/producto_5.jpg" producname="Aromatizante Ocean Breeze" descripcion="Perfume ambiental con una fragancia fresca y revitalizante inspirada en la brisa marina. Elimina olores no deseados y proporciona un ambiente limpio y relajante." [precio]="58.00"></app-card>
+<app-card imagen="/assets/imgs/producto_6.jpg" producname="Aromatizante Canela y Manzana" descripcion="Ambientador en spray con una cálida combinación de canela y manzana, perfecta para crear un ambiente acogedor y con un toque especiado y dulce." [precio]="62.00"></app-card>
+<app-card imagen="/assets/imgs/producto_7.jpg" producname="Cloro en Gel" descripcion="Poderoso desinfectante en gel que se adhiere mejor a las superficies, proporcionando una limpieza profunda y prolongada. Ideal para baños, cocinas y áreas de alto tráfico." [precio]="75.00"></app-card>
+<app-card imagen="/assets/imgs/producto_8.jpg" producname="Desengrasante Industrial" descripcion="Desengrasante de alto poder para eliminar grasa y suciedad difícil en cocinas, talleres y superficies industriales. Su fórmula avanzada actúa rápidamente y facilita la limpieza." [precio]="80.00"></app-card>
+<app-card imagen="/assets/imgs/producto_9.jpg" producname="Limpiador Multiusos" descripcion="Limpia y desinfecta todo tipo de superficies con un agradable aroma. Su fórmula efectiva elimina grasa, manchas y gérmenes, dejando un ambiente fresco y reluciente." [precio]="70.00"></app-card>
+<app-card imagen="/assets/imgs/producto_10.jpg" producname="Limpiavidrios" descripcion="Solución especializada para limpiar vidrios y espejos sin dejar marcas ni residuos. Proporciona un brillo impecable y una transparencia sin esfuerzo." [precio]="65.00"></app-card>
+<app-card imagen="/assets/imgs/producto_11.jpg" producname="Suavizante de Telas Floral" descripcion="Suavizante líquido con un fresco aroma floral que deja la ropa suave y con una fragancia duradera. Reduce la estática y facilita el planchado." [precio]="50.00"></app-card>
+<app-card imagen="/assets/imgs/producto_12.jpg" producname="Detergente Líquido para Ropa" descripcion="Detergente concentrado para una limpieza profunda de la ropa. Su fórmula elimina manchas difíciles y deja un aroma fresco y duradero en cada lavado." [precio]="55.00"></app-card>
+-->

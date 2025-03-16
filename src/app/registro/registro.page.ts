@@ -10,6 +10,7 @@ import { AlertController, LoadingController } from '@ionic/angular';
 })
 export class RegistroPage {
   name: string = '';
+  lastName: string = '';
   email: string = '';
   password: string = '';
   confirmPassword: string = '';
@@ -21,10 +22,30 @@ export class RegistroPage {
   ) {}
 
   async register() {
-    if (!this.name.trim() || !this.email.trim() || !this.password.trim() || !this.confirmPassword.trim()) {
+    if (!this.name.trim() || !this.lastName.trim() || !this.email.trim() || !this.password.trim() || !this.confirmPassword.trim()) {
       const alert = await this.alertController.create({
         header: 'Error',
         message: 'Todos los campos son obligatorios',
+        buttons: ['OK'],
+      });
+      await alert.present();
+      return;
+    }
+
+    if (this.name.length < 3) {
+      const alert = await this.alertController.create({
+        header: 'Error',
+        message: 'El nombre debe tener al menos 3 caracteres',
+        buttons: ['OK'],
+      });
+      await alert.present();
+      return;
+    }
+
+    if (this.lastName.length < 3) {
+      const alert = await this.alertController.create({
+        header: 'Error',
+        message: 'El apellido debe tener al menos 3 caracteres',
         buttons: ['OK'],
       });
       await alert.present();

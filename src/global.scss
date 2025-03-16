@@ -34,3 +34,15 @@
 
 /* @import "@ionic/angular/css/palettes/dark.always.css"; */
 /* @import "@ionic/angular/css/palettes/dark.class.css"; */
+
+.custom-toast {
+    color: white; /* Letras blancas */
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    --height: 50px; /* Altura */
+    width: 80%;
+    --border-radius: 8px;
+    --background: #39514f53;
+  }

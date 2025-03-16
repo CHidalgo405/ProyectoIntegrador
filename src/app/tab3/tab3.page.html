@@ -1,28 +1,61 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>Carrito de Compras</ion-title>
+  <ion-toolbar class="toolbar-fondo">
+    <ion-title class="titulo-centrado" routerLink="/tabs">POWER CLEAN</ion-title> 
+    <ion-buttons slot="start">
+      <ion-button routerLink="/perfil">
+        <ion-icon class="perfil" slot="icon-only" name="person-circle-outline" size="large"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+  <ion-toolbar >
+    <ion-title class="tutulo2">Carrito</ion-title>
+    <ion-button slot="end" class="boton2" size="default" (click)="confirmClearCart()">
+      <ion-icon class="icon-boton" name="trash-outline"></ion-icon>
+      Vaciar
+    </ion-button>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <ion-list *ngIf="cart.length > 0; else emptyCart">
-    <ion-item *ngFor="let item of cart">
-      <ion-label>
-        <h2>{{ item.name }}</h2>
-        <p>{{ item.description }}</p>
-        <h3>$ {{ item.price }}</h3>
-      </ion-label>
-    </ion-item>
+  <div *ngIf="cart.length === 0" class="empty-cart">
+    <img src="assets/imgs/carrito-vacio.jpeg" alt="Carrito vacío">
+  </div>
+  <ion-list *ngIf="cart.length > 0; else emptyCart" [inset]="true">
+    <ion-item-sliding>
+      <ion-item class="item-product" *ngFor="let item of cart" [button]="true" [button]="true">
+        <ion-avatar class="imagen" aria-hidden="true" slot="start">
+          <img class="img-carrito" alt="" src="assets/imgs/carrito.jpeg" />
+        </ion-avatar>
+        <ion-label>
+          <h2>{{ item.name }}</h2>
+          <p>{{ item.description }}</p>
+          <p class="precio">Precio: $ {{ item.price }}</p>
+        </ion-label>
+      </ion-item><br>
+      <ion-item-options slot="end">
+        <ion-item-option color="danger" expandable="true">
+          <ion-icon slot="icon-only" name="trash"></ion-icon>
+        </ion-item-option>
+      </ion-item-options>
+    </ion-item-sliding>
   </ion-list>
 
   <ng-template #emptyCart>
-    <ion-item>
-      <ion-label>No hay productos en el carrito.</ion-label>
-    </ion-item>
+
   </ng-template>
 
-  <ion-button expand="full" color="secondary" (click)="confirmClearCart()">Vaciar Carrito</ion-button>
 </ion-content>
-<ion-toolbar>
-  <ion-button expand="full" color="primary" (click)="goToCheckout()">Realizar Compra</ion-button>
-</ion-toolbar>
+
+<ion-footer class="footer">
+  <div class="div-total">
+    <ion-item>
+      <ion-icon name="cash-outline" slot="start"></ion-icon>
+      <ion-label>
+        <h1>Total: --</h1>
+      </ion-label>
+      <ion-button class="boton" slot="end" (click)="goToCheckout()">
+        Realizar Compra 
+      </ion-button>
+    </ion-item>
+  </div>
+</ion-footer>

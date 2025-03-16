@@ -22,6 +22,7 @@ export class Tab3Page {
     }
   }
 
+  
   ionViewWillEnter() {
     this.cart = this.cartService.getCart();
   }

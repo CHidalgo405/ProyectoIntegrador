@@ -1,3 +1,10 @@
 <ion-app>
   <ion-router-outlet></ion-router-outlet>
+  <div class="splash-screen" *ngIf="showSplash">
+    <img src="assets/imgs/logo.png" class="splash-logo" />
+  </div>
+  <ion-app *ngIf="!showSplash">
+    <ion-router-outlet></ion-router-outlet>
+  </ion-app>
+  
 </ion-app>

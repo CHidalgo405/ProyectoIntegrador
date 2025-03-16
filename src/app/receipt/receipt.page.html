@@ -1,6 +1,11 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>Comprobante de Compra</ion-title>
+  <ion-toolbar class="toolbar-fondo">
+    <ion-title class="titulo-centrado" routerLink="/tabs">POWER CLEAN</ion-title> 
+    <ion-buttons slot="start">
+      <ion-button routerLink="/perfil">
+        <ion-icon class="perfil" slot="icon-only" name="person-circle-outline" size="large"></ion-icon>
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
@@ -12,7 +17,7 @@
 
     <ion-card-content>
       <p>Hemos enviado el comprobante a <strong>{{ customer.email }}</strong></p>
-      <h3>Productos:</h3>
+      <h3>Productos:</h3> <br>
       <ion-list>
         <ion-item *ngFor="let item of cart">
           <ion-label>
@@ -20,8 +25,8 @@
             <p>${{ item.price }}</p>
           </ion-label>
         </ion-item>
-      </ion-list>
-      <h3>Total: ${{ total }}</h3>
+      </ion-list><br>
+      <h1>Total: ${{ total }}</h1>
     </ion-card-content>
   </ion-card>
 

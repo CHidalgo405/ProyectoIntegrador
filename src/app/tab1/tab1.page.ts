@@ -8,6 +8,8 @@ import { Component } from '@angular/core';
 })
 export class Tab1Page {
 
+  selectedSegment: string = 'first'; // Selecciona la pestaña por defecto
+  
   constructor() {}
 
 }

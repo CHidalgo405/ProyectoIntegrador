@@ -1,15 +1,39 @@
-ion-title{
-    color: #023E8A;
+.titulo-centrado {
+    color: #ffffff;
+    font-size: 25px;
     font-weight: bold;
     text-align: center;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+
+
+.toolbar-fondo {
+  background: url('/assets/imgs/toolbar.jpeg') no-repeat center center;
+  background-size: cover;
+  backdrop-filter: none !important; // Desactiva cualquier filtro
+  --background: transparent !important; // Evita que se superponga otro fondo
+  color: #000000;
+}
+
+ion-searchbar{
+    --background: #4a827e5e;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    --border-radius: 25px ;
+    --overflow: hidden ;
+}
+
+.perfil{
+  color: #d6d6d6;
 }
 
 app-card{
     width: 50%;
-}
-
-ion-icon{
-    color: #023E8A;
 }
 
 img{
@@ -18,28 +42,13 @@ img{
     margin: 0 auto;
 }
 
-.h1-editado{
-    color: #023E8A;
-    font-weight: bold;
-    text-align: center;
-}
-
-.div-valores {
-    width: 40%;
-    margin: 0 auto;
-    text-align: justify;
-}
-
-.div-horarios {
-    width: 90%;
-    margin: 0 auto;
-}
-
-.logo{
-    width: 170px;
-}
 
 iframe {
     display: block;
     margin: 0 auto;
 }
+
+.custom-toast {
+    --color: white; /* Letras blancas */
+    height: 100px; /* Altura */
+  }

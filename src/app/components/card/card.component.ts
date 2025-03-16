@@ -1,6 +1,7 @@
-import { Component, Input, input, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { CartService } from '/Users/carloshidalgohernandez/ProyectoIntegrador/src/app/services/cart.service';
-import { AlertController } from '@ionic/angular';
+import { AlertController, ModalController } from '@ionic/angular';
+import { ProductModalComponent } from '../product-modal/product-modal.component'; // Importa el componente del modal
 
 @Component({
   selector: 'app-card',
@@ -8,14 +9,21 @@ import { AlertController } from '@ionic/angular';
   styleUrls: ['./card.component.scss'],
   standalone: false,
 })
-export class CardComponent  implements OnInit {
+export class CardComponent implements OnInit {
   @Input() producname!: string;
   @Input() descripcion!: string;
   @Input() precio!: number;
+  @Input() imagen!: string; // Nueva propiedad para la imagen
 
-  constructor(private cartService: CartService, private alertController: AlertController) {}
+  constructor(
+    private cartService: CartService,
+    private alertController: AlertController,
+    private modalController: ModalController // Inyecta el ModalController
+  ) {}
 
-  async addToCart() {
+  async addToCart(event: Event) {
+    event.stopPropagation(); // Detiene la propagación del evento de clic
+
     const product = {
       name: this.producname,
       description: this.descripcion,
@@ -33,6 +41,18 @@ export class CardComponent  implements OnInit {
     await alert.present();
   }
 
-  ngOnInit() {}
+  async openModal() {
+    const modal = await this.modalController.create({
+      component: ProductModalComponent,
+      componentProps: {
+        producname: this.producname,
+        descripcion: this.descripcion,
+        precio: this.precio,
+        imagen: this.imagen
+      }
+    });
+    return await modal.present();
+  }
 
+  ngOnInit() {}
 }

@@ -31,6 +31,10 @@ const routes: Routes = [
     path: 'receipt',
     loadChildren: () => import('./receipt/receipt.module').then( m => m.ReceiptPageModule)
   },
+  {
+    path: 'tab4',
+    loadChildren: () => import('./tab4/tab4.module').then( m => m.Tab4PageModule)
+  },
 ];
 
 @NgModule({

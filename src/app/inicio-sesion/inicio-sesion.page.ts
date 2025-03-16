@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { AlertController, LoadingController } from '@ionic/angular';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-inicio-sesion',
@@ -15,10 +16,12 @@ export class InicioSesionPage {
   constructor(
     private router: Router,
     private alertController: AlertController,
-    private loadingController: LoadingController
+    private loadingController: LoadingController,
+    private authService: AuthService,
+
   ) {}
 
-  async login() {
+  async login1() {
     const loading = await this.loadingController.create({
       message: 'Iniciando sesión...',
     });
@@ -38,5 +41,15 @@ export class InicioSesionPage {
         await alert.present();
       }
     }, 1500);
+  }
+
+  async login() {
+    const user = await this.authService.loginWithGoogle();
+    if (user) {
+      console.log('Usuario autenticado:', user);
+      this.router.navigate(['/tabs/tab1']); // Redirige a la página principal
+    } else {
+      console.log('Error en la autenticación');
+    }
   }
 }

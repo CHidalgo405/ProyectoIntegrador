@@ -1,42 +1,26 @@
 <ion-header>
+  <ion-toolbar class="toolbar-fondo">
+    <ion-title class="titulo-centrado" routerLink="/tabs">POWER CLEAN</ion-title> 
+    <ion-buttons slot="start">
+      <ion-button routerLink="/perfil">
+        <ion-icon class="perfil" slot="icon-only" name="person-circle-outline" size="large"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
   <ion-toolbar>
     <ion-buttons slot="start">
-      <ion-back-button default-href="/tabs"></ion-back-button>
+      <ion-back-button default-href="#"></ion-back-button>
     </ion-buttons>
-    <ion-title>
-      <img src="assets/imgs/logo.png" alt="Product 1" class="logo"/>
-    </ion-title> 
+    <ion-title class="titulo-secundario">Detalles de pago</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
-  <h1 class="ion-text-center">Detalles de Pago</h1>
-  <form (ngSubmit)="processPayment()">
-    <ion-item>
-      <ion-label position="floating">Nombre Completo</ion-label>
-      <ion-input [(ngModel)]="customer.name" name="name" required></ion-input>
-    </ion-item>
 
-    <ion-item>
-      <ion-label position="floating">Correo Electrónico</ion-label>
-      <ion-input [(ngModel)]="customer.email" name="email" type="email" required></ion-input>
-    </ion-item>
-
-    <ion-item>
-      <ion-label position="floating">Número de Tarjeta</ion-label>
-      <ion-input [(ngModel)]="payment.cardNumber" name="cardNumber" type="text" required maxlength="16"></ion-input>
-    </ion-item>
-
-    <ion-item>
-      <ion-label position="floating">Fecha de Expiración</ion-label>
-      <ion-input [(ngModel)]="payment.expiry" name="expiry" type="text" required placeholder="" required maxlength="5"></ion-input>
-    </ion-item>
-
-    <ion-item>
-      <ion-label position="floating">CVV</ion-label>
-      <ion-input [(ngModel)]="payment.cvv" name="cvv" type="text" required maxlength="3"></ion-input>
-    </ion-item>
-
-    <ion-button expand="full" color="success" type="submit">Confirmar Pago</ion-button>
-  </form>
+<ion-content class="ion-padding"><br>
+  <img class="imagen" src="assets/imgs/tarjeta.jpeg" alt="Tarjeta de crédito" />
+  <ion-item class="texto">
+    <h6>Aqui podras ingresar los detalles de tu tarjeta para poder comprar los productos que tienes en tu carrito.</h6>
+  </ion-item>
+  <br>
+  <div class="paypal" id="paypal-button-container"></div>
 </ion-content>

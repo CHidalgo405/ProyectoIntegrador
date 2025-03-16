@@ -1,101 +1,72 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>
-      <img src="assets/imgs/logo.png" alt="Product 1" class="logo"/>
-    </ion-title> 
-    <ion-buttons slot="secondary">
+<ion-header>
+  <ion-toolbar class="toolbar-fondo">
+    <ion-title class="titulo-centrado" routerLink="/tabs">POWER CLEAN</ion-title> 
+    <ion-buttons slot="start">
       <ion-button routerLink="/perfil">
-        <ion-icon slot="icon-only" name="person-circle-outline" size="large"></ion-icon>
+        <ion-icon class="perfil" slot="icon-only" name="person-circle-outline" size="large"></ion-icon>
       </ion-button>
     </ion-buttons>
-
+  </ion-toolbar>
+  <ion-toolbar>
+    <ion-searchbar show-cancel-button="focus" placeholder="Buscar productos ..." ></ion-searchbar>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-searchbar placeholder="Buscar productos..."></ion-searchbar><br>
-  <img src="assets/imgs/home-1.jpeg" alt="Product 1"/><br>
-  <ion-segment>
-    <ion-segment-button value="first" content-id="first">
+<ion-content [fullscreen]="true"><br>
+  <img src="assets/imgs/home-1.jpeg" alt="Product 1" routerLink="/tabs/tab2" /><br> 
+  <ion-segment [(ngModel)]="selectedSegment">
+    <ion-segment-button value="first">
       <ion-label>Limpieza</ion-label>
     </ion-segment-button>
-    <ion-segment-button value="second" content-id="second">
+    <ion-segment-button value="second">
       <ion-label>Aromas</ion-label>
     </ion-segment-button>
-    <ion-segment-button value="third" content-id="third">
+    <ion-segment-button value="third">
       <ion-label>Otros</ion-label>
     </ion-segment-button>
   </ion-segment>
-  <ion-segment-view>
-  <!-- limpieza -->
-    <ion-segment-content id="first">
-      <ion-grid>
-        <ion-row>
-          <app-card producname="Cloro Espumoso" descripcion="Desinfectante de alto poder con espuma activa." [precio]="70.00"></app-card>
-          <app-card producname="Cloro Concentrado" descripcion="Blanqueador y desinfectante multiusos." [precio]="65.00"></app-card>
-          <app-card producname="Desinfectante Multiusos" descripcion="Limpia y elimina bacterias en múltiples superficies." [precio]="75.00"></app-card>
-          <app-card producname="Desinfectante en Aerosol" descripcion="Fácil aplicación y rápida desinfección." [precio]="80.00"></app-card>
-        </ion-row>
-      </ion-grid>
-    </ion-segment-content>
-
-    <!-- aromas -->
-    <ion-segment-content id="second">
-      <ion-grid>
-        <ion-row>
-          <app-card producname="Aromatizante Lavanda" descripcion="Aromatizante en spray con esencia de lavanda." [precio]="50.00"></app-card>
-          <app-card producname="Aromatizante Cítrico" descripcion="Ambientador con fragancia a cítricos." [precio]="55.00"></app-card>
-          <app-card producname="Aromatizante Vainilla" descripcion="Perfume ambiental con aroma a vainilla." [precio]="60.00"></app-card>
-          <app-card producname="Aromatizante Floral" descripcion="Fragancia en spray con esencias florales." [precio]="58.00"></app-card>
-        </ion-row>
-      </ion-grid>
-    </ion-segment-content>
-
-    <!-- otros -->
-    <ion-segment-content id="third">
-      <ion-grid>
-        <ion-row>
-          <app-card producname="Jabón Líquido Antibacterial" descripcion="Jabón líquido con propiedades antibacteriales." [precio]="45.00"></app-card>
-          <app-card producname="Jabón Líquido Neutro" descripcion="Jabón sin fragancia para piel sensible." [precio]="40.00"></app-card>
-          <app-card producname="Jabón Líquido Coco" descripcion="Jabón suave con aroma a coco." [precio]="48.00"></app-card>
-          <app-card producname="Jabón Líquido Almendra" descripcion="Hidratante con fragancia a almendra." [precio]="50.00"></app-card>
-        </ion-row>
-      </ion-grid>
-    </ion-segment-content>
-  </ion-segment-view>
-  <p class="ion-text-center">
-    Para visualizar todos los productos, selecciona la pestaña "Catalogo".
-  </p><br>
-  <h1 class="h1-editado">NUESTROS VALORES</h1>
+  
+  <!-- Limpieza -->
+  <ion-grid *ngIf="selectedSegment === 'first'"> 
+    <ion-row>
+      <app-card imagen="/assets/imgs/producto_9.jpg" producname="Jabón Líquido Antibacterial" descripcion="Jabón líquido con propiedades antibacteriales, ideal para una limpieza profunda y efectiva. Formulado para eliminar gérmenes y bacterias sin resecar la piel, proporcionando una sensación de frescura y protección." [precio]="45.00"></app-card>
+      <app-card imagen="/assets/imgs/producto_10.jpg" producname="Jabón Líquido Neutro" descripcion="Jabón sin fragancia especialmente diseñado para pieles sensibles. Su fórmula suave ayuda a mantener el equilibrio natural de la piel, evitando irritaciones y ofreciendo una limpieza delicada y efectiva." [precio]="40.00"></app-card>
+      <app-card imagen="/assets/imgs/producto_11.jpg" producname="Jabón Líquido Coco" descripcion="Jabón líquido con una fórmula suave y cremosa que limpia profundamente mientras deja la piel hidratada. Su delicioso aroma a coco brinda una experiencia refrescante y tropical en cada uso." [precio]="48.00"></app-card>
+      <app-card imagen="/assets/imgs/producto_12.jpg" producname="Jabón Líquido Almendra" descripcion="Hidratante con fragancia a almendra que proporciona una limpieza delicada y nutritiva. Su fórmula con extracto de almendra deja la piel suave, tersa y con un agradable aroma dulce y envolvente." [precio]="50.00"></app-card>
+    </ion-row>
+  </ion-grid>
+  
+  <!-- Aromas -->
+  <ion-grid *ngIf="selectedSegment === 'second'">
+    <ion-row>
+      <app-card imagen="/assets/imgs/producto_5.jpg" producname="Aromatizante Lavanda" descripcion="Aromatizante en spray con esencia de lavanda, ideal para crear un ambiente relajante y armonioso. Su fragancia duradera ayuda a neutralizar olores y proporciona una sensación de tranquilidad y bienestar." [precio]="50.00"></app-card>
+      <app-card imagen="/assets/imgs/producto_6.jpg" producname="Aromatizante Cítrico" descripcion="Ambientador con fragancia a cítricos que refresca y revitaliza cualquier espacio. Su mezcla de notas de limón, naranja y mandarina ayuda a eliminar malos olores y deja un ambiente limpio y energizante." [precio]="55.00"></app-card>
+      <app-card imagen="/assets/imgs/producto_7.jpg" producname="Aromatizante Vainilla" descripcion="Perfume ambiental con aroma a vainilla que envuelve tu hogar u oficina con una fragancia dulce y reconfortante. Su fórmula en spray permite una aplicación fácil y uniforme, dejando un ambiente cálido y acogedor." [precio]="60.00"></app-card>
+      <app-card imagen="/assets/imgs/producto_8.jpg" producname="Aromatizante Floral" descripcion="Fragancia en spray con esencias florales que transforman cualquier espacio en un jardín perfumado. Su fórmula ayuda a eliminar malos olores y proporciona una sensación de frescura y naturalidad." [precio]="58.00"></app-card>
+    </ion-row>
+  </ion-grid>
+  
+  <!-- Otros -->
+  <ion-grid *ngIf="selectedSegment === 'third'">
+    <ion-row>
+      <app-card imagen="/assets/imgs/producto_1.jpg" producname="Cloro Espumoso" descripcion="Desinfectante de alto poder con espuma activa que facilita la limpieza y desinfección de diversas superficies. Su fórmula elimina gérmenes, bacterias y hongos, dejando un ambiente higiénico y seguro." [precio]="70.00"></app-card>
+      <app-card imagen="/assets/imgs/producto_2.jpg" producname="Cloro Concentrado" descripcion="Blanqueador y desinfectante multiusos con una fórmula de alta concentración para una limpieza efectiva. Ideal para eliminar manchas difíciles y desinfectar superficies con máxima eficiencia." [precio]="65.00"></app-card>
+      <app-card imagen="/assets/imgs/producto_3.jpg" producname="Desinfectante Multiusos" descripcion="Limpia y elimina bacterias en múltiples superficies con una fórmula efectiva y de rápida acción. Perfecto para la desinfección del hogar, oficinas y áreas de alto contacto, dejando un ambiente fresco y seguro." [precio]="75.00"></app-card>
+      <app-card imagen="/assets/imgs/producto_4.jpg" producname="Desinfectante en Aerosol" descripcion="Fácil aplicación y rápida desinfección en cualquier espacio. Su fórmula en aerosol permite una distribución uniforme para eliminar virus, bacterias y malos olores, dejando un ambiente limpio y protegido." [precio]="80.00"></app-card>
+    </ion-row>
+  </ion-grid>
+  
+  <img src="assets/imgs/home-2.jpeg" alt="Product 1" routerLink="/tabs/tab2" /><br> 
   <ion-row>
-    <div class="div-valores">
-      <h3 class="ion-text-center"><ion-icon name="ribbon-outline"></ion-icon> Nuestra Empresa</h3>
-      <p>Dedicados a la fabricación y distribución de productos de limpieza de alta calidad.</p>
-    </div>
-    <div class="div-valores">
-      <h3 class="ion-text-center"><ion-icon name="calendar-number-outline"></ion-icon> Logística Eficiente</h3>
-      <p>Contamos con una red de distribución que garantiza la entrega oportuna de nuestros productos.</p>
-    </div>
-    <div class="div-valores">
-      <h3 class="ion-text-center"><ion-icon name="diamond-outline"></ion-icon> Calidad Garantizada</h3>
-      <p>Nuestros productos pasan por estrictos controles de calidad para asegurar su efectividad.</p>
-    </div>
-    <div class="div-valores">
-      <h3 class="ion-text-center"><ion-icon name="star-outline"></ion-icon> Excelencia</h3>
-      <p>Buscamos la excelencia en cada uno de nuestros procesos para satisfacer a nuestros clientes.</p>
-    </div>
-      <br>
-  </ion-row>
-  <h1 class="h1-editado">Horarios de Atención</h1>
-  <div class="div-horarios">
-  <h6> <ion-icon name="time-outline"></ion-icon> Lunes a Viernes: 9:00 AM - 6:00 PM <br><br>
-    <ion-icon name="timer-outline"></ion-icon> Sábado: 10:00 AM - 2:00 PM <br><br>
-    <ion-icon name="close-circle-outline"></ion-icon> Domingo: Cerrado <br><br>
-    <ion-icon name="location-outline"></ion-icon> Col. San Miguelito calle 20 de Septiembre carretera a San Jose Tapia <br><br>
-    <ion-icon name="call-outline"></ion-icon> 271-197-2313 <br><br>
-  </h6>
-  </div>
-  <div>
-    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1887.7896183410664!2d-96.91862110600643!3d18.861367613436375!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x85c4f1be87cf098b%3A0xb8a0b35d5232baf8!2sVenta%20de%20productos%20e%20insumos%20para%20Limpieza!5e0!3m2!1ses-419!2smx!4v1721284981138!5m2!1ses-419!2smx" width="90%" height="250" style="border:0;" loading="lazy" referrerpolicy="no-referrer-when-downgrade" ></iframe>
-  </div>
+    <app-card imagen="/assets/imgs/producto_3.jpg" producname="Desinfectante Multiusos" descripcion="Limpia y elimina bacterias en múltiples superficies con una fórmula efectiva y de rápida acción. Perfecto para la desinfección del hogar, oficinas y áreas de alto contacto, dejando un ambiente fresco y seguro." [precio]="75.00"></app-card>
+    <app-card imagen="/assets/imgs/producto_7.jpg" producname="Aromatizante Vainilla" descripcion="Perfume ambiental con aroma a vainilla que envuelve tu hogar u oficina con una fragancia dulce y reconfortante. Su fórmula en spray permite una aplicación fácil y uniforme, dejando un ambiente cálido y acogedor." [precio]="60.00"></app-card>
+    <app-card imagen="/assets/imgs/producto_10.jpg" producname="Jabón Líquido Neutro" descripcion="Jabón sin fragancia especialmente diseñado para pieles sensibles. Su fórmula suave ayuda a mantener el equilibrio natural de la piel, evitando irritaciones y ofreciendo una limpieza delicada y efectiva." [precio]="40.00"></app-card>
+    <app-card imagen="/assets/imgs/producto_9.jpg" producname="Jabón Líquido Antibacterial" descripcion="Jabón líquido con propiedades antibacteriales, ideal para una limpieza profunda y efectiva. Formulado para eliminar gérmenes y bacterias sin resecar la piel, proporcionando una sensación de frescura y protección." [precio]="45.00"></app-card>
+  </ion-row><br>
+
+  <ion-button class="boton" routerLink="/tabs/tab2">
+    Ver más productos
+    <ion-icon class="icon-boton" name="arrow-forward-outline"></ion-icon>
+  </ion-button><br>
+
 </ion-content>

@@ -1,10 +1,10 @@
 ion-avatar{
-    width: 180px;
-    height: 180px;
+    width: 192px;
+    height: 205px;
     margin: 0 auto;
     display: block;
     border-radius: 50%;
-    margin-top: 20px;
+    margin-top: 0px;
 }
 
 ion-button{
@@ -22,4 +22,98 @@ h1{
 h6{
     text-align: center;
     margin-top: 20px;
+}
+
+.titulo{
+    text-align: center;
+    font-weight: bold;
+    margin-top: 8px;
+    font-size: 22px;
+    color: #4A827E;
+}
+
+.subtitulo{
+    font-weight: bold;
+    margin-top: 8px;
+    font-size: 18px;
+    color: #000000;
+}
+
+.nota{
+    color: #4A827E;
+}
+
+P{
+    text-align: justify;
+}
+
+ion-radio-group{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+}
+
+ion-radio{
+    margin-right: 12px;
+}
+
+ion-radio::part(container) {
+    width: 30px;
+    height: 30px;
+  
+    border-radius: 8px;
+    border: 2px solid #a8a8a8;
+  }
+  
+  ion-radio::part(mark) {
+    background: none;
+    transition: none;
+    transform: none;
+    border-radius: 0;
+  }
+  
+  ion-radio.radio-checked::part(container) {
+    background: #4A827E;
+    border-color: transparent;
+  }
+  
+  ion-radio.radio-checked::part(mark) {
+    width: 6px;
+    height: 10px;
+  
+    border-width: 0px 2px 2px 0px;
+    border-style: solid;
+    border-color: #fff;
+  
+    transform: rotate(45deg);
+  }
+
+  .boton{
+    width: 60%;
+    height: 45px;
+    border-radius: 25px; /* Ajusta este valor para controlar el redondeo */
+    overflow: hidden; /* Asegura que el contenido interno también se ajuste al redondeo */
+    text-align: center;
+    color: #ffffff;
+    display: block;
+    margin: 10px auto;
+}
+
+.cerrar{
+    background-color: #4A827E;
+    border-radius: 15px;
+    width: 100px;
+    height: 40px;
+    text-align: center;
+    margin-top: 0;
+    color: #ffffff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.icon-boton{
+    color: #ffffff;
+    margin-right: 7px;
 }

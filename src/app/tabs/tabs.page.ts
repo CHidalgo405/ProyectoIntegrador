@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router, NavigationEnd } from '@angular/router';
 
 @Component({
   selector: 'app-tabs',
@@ -7,7 +8,13 @@ import { Component } from '@angular/core';
   standalone: false,
 })
 export class TabsPage {
+  selectedTab: string = 'tab1';
 
-  constructor() {}
-
+  constructor(private router: Router) {
+    this.router.events.subscribe(event => {
+      if (event instanceof NavigationEnd) {
+        this.selectedTab = event.urlAfterRedirects.split('/').pop() || 'tab1';
+      }
+    });
+  }
 }

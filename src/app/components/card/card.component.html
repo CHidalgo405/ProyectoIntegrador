@@ -1,23 +1,20 @@
-<ion-col>
+<ion-col (click)="openModal()">
   <ion-card>
-    <img src="assets/imgs/producto_6.jpg" alt="Product 1"  />
+    <img [src]="imagen" alt="{{producname}}" />
     <ion-card-content>
       <h2>{{producname}}</h2>
       <p>{{descripcion}}</p>
       <p>
-        <ion-icon name="star"></ion-icon>
-        <ion-icon name="star"></ion-icon>
-        <ion-icon name="star"></ion-icon>
-        <ion-icon name="star"></ion-icon>
-        <ion-icon name="star-half"></ion-icon>
+        <ion-icon class="estrellas" name="star"></ion-icon>
+        <ion-icon class="estrellas" name="star"></ion-icon>
+        <ion-icon class="estrellas" name="star"></ion-icon>
+        <ion-icon class="estrellas" name="star"></ion-icon>
+        <ion-icon class="estrellas" name="star-half"></ion-icon>
       </p>
-      <ion-item>
-        <h6>$ {{precio}}</h6>
-        <ion-button slot="end" size="default" (click)="addToCart()">
-          <ion-icon name="cart"></ion-icon>
+      <h1>$ {{precio}}</h1>
+        <ion-button class="boton" (click)="addToCart($event)">
+          <ion-icon class="icon-boton" name="cart"></ion-icon>
         </ion-button>
-      </ion-item>
     </ion-card-content>
   </ion-card>
 </ion-col>
-

@@ -1,7 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, AfterViewInit } from '@angular/core';
 import { Router, NavigationExtras } from '@angular/router';
 import { AlertController } from '@ionic/angular';
 import { CartService } from '../services/cart.service';
+
+declare var paypal: any; // Declaramos la variable global para PayPal
 
 @Component({
   selector: 'app-checkout',
@@ -9,7 +11,7 @@ import { CartService } from '../services/cart.service';
   styleUrls: ['./checkout.page.scss'],
   standalone: false,
 })
-export class CheckoutPage {
+export class CheckoutPage implements AfterViewInit {
   customer = { name: '', email: '' };
   payment = { cardNumber: '', expiry: '', cvv: '' };
   cart: any[] = [];
@@ -52,5 +54,33 @@ export class CheckoutPage {
       });
       await alert.present();
     }
+  }
+
+  ngAfterViewInit() {
+    this.initPayPal();
+  }
+
+  initPayPal() {
+    console.log('Inicializando PayPal');
+    paypal.Buttons({
+      createOrder: (data: any, actions: any) => {
+        return actions.order.create({
+          purchase_units: [{
+            amount: {
+              value: '1.00' // Monto a pagar en la moneda configurada (cambiar si es necesario)
+            }
+          }]
+        });
+      },
+      onApprove: async (data: any, actions: any) => {
+        const order = await actions.order.capture();
+        console.log('Pago completado con éxito:', order);
+        alert('Pago realizado con éxito');
+      },
+      onError: (err: any) => {
+        console.error('Error en el pago:', err);
+        alert('Hubo un error con el pago. Inténtalo de nuevo.');
+      }
+    }).render('#paypal-button-container'); // Renderiza el botón en el contenedor
   }
 }
