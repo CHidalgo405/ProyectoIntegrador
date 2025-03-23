@@ -8,15 +8,11 @@
   <div class="container">
     <div class="screen">
       <div class="screen__content">
-        <form class="login">
+        <form (ngSubmit)="onSubmit()" class="login">
           <h1>Crear Cuenta</h1><br>
           <p>Ingresa tus datos para <br> registrarte</p><br>
 
           <ion-input [(ngModel)]="name" name="name" label="Nombre (s)" label-placement="floating" fill="outline" placeholder="Nombre (s)" type="name">
-            <ion-icon name="person-outline" slot="start"></ion-icon>
-          </ion-input><br>
-
-          <ion-input [(ngModel)]="lastName" name="lastName" label="Apellidos" label-placement="floating" fill="outline" placeholder="Apellidos" type="name">
             <ion-icon name="person-outline" slot="start"></ion-icon>
           </ion-input><br>
 
@@ -28,14 +24,20 @@
             <ion-icon name="lock-closed-outline" slot="start"></ion-icon>
           </ion-input><br>
 
-          <ion-input [(ngModel)]="confirmPassword" name="confirmPassword" label="Confirmar contraseña" label-placement="floating" fill="outline" placeholder="Confirma tu contraseña" type="password">
-            <ion-icon name="lock-closed-outline" slot="start"></ion-icon>
-          </ion-input><br> 
 
-          <button class="button login__submit" (click)="register()">
+          <button class="button login__submit" type="submit" expand="block" [disabled]="!name || !email || !password">
             <span class="button__text">Registrarse</span>
             <ion-icon class="button__icon" name="person-add-outline" size="large"></ion-icon>
-          </button>        
+          </button>  
+          
+          <ion-text color="danger" *ngIf="errorMessage">
+            {{ errorMessage }}
+          </ion-text>
+      
+          <ion-text color="success" *ngIf="successMessage">
+            {{ successMessage }}
+          </ion-text>
+          
         </form><br>
         
         <div class="links"> 

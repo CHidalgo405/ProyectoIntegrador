@@ -5,6 +5,7 @@ import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ProductModalComponent } from './components/product-modal/product-modal.component';
+import { provideHttpClient } from '@angular/common/http';
 
 // Firebase
 import { provideFirebaseApp, initializeApp } from '@angular/fire/app';
@@ -18,7 +19,7 @@ import { environment } from '../environments/environment';
   providers: [
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     provideFirebaseApp(() => initializeApp(environment.firebaseConfig)),
-    provideAuth(() => getAuth())
+    provideAuth(() => getAuth()), provideHttpClient()
   ],
   bootstrap: [AppComponent],
 })

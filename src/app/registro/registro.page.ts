@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { AlertController, LoadingController } from '@ionic/angular';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-registro',
@@ -10,102 +10,33 @@ import { AlertController, LoadingController } from '@ionic/angular';
 })
 export class RegistroPage {
   name: string = '';
-  lastName: string = '';
   email: string = '';
   password: string = '';
-  confirmPassword: string = '';
+  errorMessage: string = '';
+  successMessage: string = '';
 
   constructor(
-    private router: Router,
-    private alertController: AlertController,
-    private loadingController: LoadingController
-  ) {}
+    private authService: AuthService,
+    private router: Router
+  ) { }
 
-  async register() {
-    if (!this.name.trim() || !this.lastName.trim() || !this.email.trim() || !this.password.trim() || !this.confirmPassword.trim()) {
-      const alert = await this.alertController.create({
-        header: 'Error',
-        message: 'Todos los campos son obligatorios',
-        buttons: ['OK'],
-      });
-      await alert.present();
-      return;
-    }
+  onSubmit() {
+    this.errorMessage = '';
+    this.successMessage = '';
 
-    if (this.name.length < 3) {
-      const alert = await this.alertController.create({
-        header: 'Error',
-        message: 'El nombre debe tener al menos 3 caracteres',
-        buttons: ['OK'],
-      });
-      await alert.present();
-      return;
-    }
-
-    if (this.lastName.length < 3) {
-      const alert = await this.alertController.create({
-        header: 'Error',
-        message: 'El apellido debe tener al menos 3 caracteres',
-        buttons: ['OK'],
-      });
-      await alert.present();
-      return;
-    }
-
-    if (!this.validateEmail(this.email)) {
-      const alert = await this.alertController.create({
-        header: 'Error',
-        message: 'El correo electrónico no es válido',
-        buttons: ['OK'],
-      });
-      await alert.present();
-      return;
-    }
-
-    if (this.password.length < 6) {
-      const alert = await this.alertController.create({
-        header: 'Error',
-        message: 'La contraseña debe tener al menos 6 caracteres',
-        buttons: ['OK'],
-      });
-      await alert.present();
-      return;
-    }
-
-    if (this.password !== this.confirmPassword) {
-      const alert = await this.alertController.create({
-        header: 'Error',
-        message: 'Las contraseñas no coinciden',
-        buttons: ['OK'],
-      });
-      await alert.present();
-      return;
-    }
-
-    const loading = await this.loadingController.create({
-      message: 'Registrando...',
-    });
-    await loading.present();
-
-    // Simulación de registro
-    setTimeout(async () => {
-      await loading.dismiss();
-      const alert = await this.alertController.create({
-        header: 'Éxito',
-        message: 'Registro exitoso. Ahora puedes iniciar sesión.',
-        buttons: [{
-          text: 'OK',
-          handler: () => {
+    this.authService.register(this.name, this.email, this.password)
+      .subscribe({
+        next: (response) => {
+          console.log('Registro exitoso', response);
+          this.successMessage = '¡Registro exitoso! Redirigiendo al login...';
+          setTimeout(() => {
             this.router.navigate(['/inicio-sesion']);
-          }
-        }],
+          }, 2000);
+        },
+        error: (error) => {
+          console.error('Error en registro', error);
+          this.errorMessage = error.error?.message || 'Error al registrar usuario';
+        }
       });
-      await alert.present();
-    }, 1500);
-  }
-
-  private validateEmail(email: string): boolean {
-    const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
-    return emailPattern.test(email);
   }
 }

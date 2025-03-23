@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
-import { AlertController, LoadingController } from '@ionic/angular';
 import { AuthService } from '../services/auth.service';
+import { Router } from '@angular/router'; // Importamos el Router
 
 @Component({
   selector: 'app-inicio-sesion',
@@ -12,44 +11,38 @@ import { AuthService } from '../services/auth.service';
 export class InicioSesionPage {
   email: string = '';
   password: string = '';
+  loading: boolean = false;
+  errorMessage: string = '';
+  successMessage: string = '';
 
   constructor(
-    private router: Router,
-    private alertController: AlertController,
-    private loadingController: LoadingController,
     private authService: AuthService,
-
+    private router: Router // Inyectamos el Router
   ) {}
 
-  async login1() {
-    const loading = await this.loadingController.create({
-      message: 'Iniciando sesión...',
-    });
-    await loading.present();
+  onSubmit() {
+    this.loading = true;
+    this.errorMessage = '';
+    this.successMessage = '';
 
-    // Simulación de autenticación
-    setTimeout(async () => {
-      await loading.dismiss();
-      if (this.email === 'equipo1@gmail.com' && this.password === '123456') {
-        this.router.navigate(['/tabs']);
-      } else {
-        const alert = await this.alertController.create({
-          header: 'Error',
-          message: 'Correo o contraseña incorrectos',
-          buttons: ['OK'],
-        });
-        await alert.present();
-      }
-    }, 1500);
-  }
-
-  async login() {
-    const user = await this.authService.loginWithGoogle();
-    if (user) {
-      console.log('Usuario autenticado:', user);
-      this.router.navigate(['/tabs/tab1']); // Redirige a la página principal
-    } else {
-      console.log('Error en la autenticación');
-    }
+    this.authService.login(this.email, this.password)
+      .subscribe({
+        next: (response) => {
+          this.loading = false;
+          this.successMessage = '¡Login exitoso!';
+          console.log('Respuesta completa:', response);
+          // Redirigimos a /tabs/tabs después de un login exitoso
+          this.router.navigate(['/tabs']);
+        },
+        error: (error) => {
+          this.loading = false;
+          this.errorMessage = 'Error en el login: ' + error.message;
+          console.error('Detalles del error:', error);
+        },
+        complete: () => {
+          this.loading = false;
+          console.log('Solicitud completada');
+        }
+      });
   }
 }
