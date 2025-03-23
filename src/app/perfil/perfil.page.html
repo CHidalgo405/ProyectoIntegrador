@@ -8,84 +8,51 @@
 </ion-header>
 
 <ion-content class="ion-padding" [fullscreen]="true">
-  <div *ngIf="loading" class="ion-text-center">
-    <ion-spinner></ion-spinner>
-    <p>Cargando datos...</p>
-  </div>
-
-  <div *ngIf="!loading">
-    <ion-avatar>
-      <img alt="Avatar" src="https://www.pngkey.com/png/full/114-1149878_setting-user-avatar-in-specific-size-without-breaking.png" />
-    </ion-avatar><br>
-    <ion-item>
-      <ion-icon aria-hidden="true" name="person-outline" slot="start"></ion-icon>
-      <ion-label>
-        <h2>Nombre (s)</h2>
-        <p>{{ userData.nombre || 'No disponible' }}</p><br>
-        <h2>Apellido (s)</h2>
-        <p>{{ userData.apellido || 'No disponible' }}</p>
-      </ion-label>
-    </ion-item>  
-    <ion-item>
-      <ion-icon aria-hidden="true" name="mail-outline" slot="start"></ion-icon>
-      <ion-label>
-        <h2>Correo electrónico</h2>
-        <p>{{ userData.email || 'No disponible' }}</p>
-      </ion-label>
-    </ion-item> 
-    <ion-item>
-      <ion-icon aria-hidden="true" name="call-outline" slot="start"></ion-icon>
-      <ion-label>
-        <h2>Teléfono celular</h2>
-        <p>{{ userData.telefono || 'No disponible' }}</p>
-      </ion-label>
-    </ion-item> 
-    <ion-item>
-      <ion-icon aria-hidden="true" name="location-outline" slot="start"></ion-icon>
-      <ion-label>
-        <h2>Dirección</h2>
-        <p>{{ userData.direccion || 'No disponible' }}</p>
-      </ion-label>
-    </ion-item> 
-    <ion-item>
-      <ion-toggle>
-        <ion-label>Recibir notificaciones</ion-label>
-        <ion-note color="medium">Puedes activarlas y desactivarlas cuando quieras</ion-note>
-      </ion-toggle>
-    </ion-item><br>
-    <ion-radio-group [value]="userData.genero === 'Hombre' ? 'custom-checked' : 'custom'">
-      <ion-radio value="custom" aria-label="Mujer"> Mujer </ion-radio>
-      <ion-radio value="custom-checked" aria-label="Hombre"> Hombre </ion-radio>
-    </ion-radio-group><br>
-    <ion-button class="boton">
-      <ion-icon slot="start" name="pencil-outline"></ion-icon>
-      Editar perfil
-    </ion-button>  
-    <ion-button class="boton" expand="block" (click)="setOpen(true)">
-      <ion-icon name="document-text-outline"></ion-icon>
-      Términos y condiciones
-    </ion-button>
-    <ion-modal [isOpen]="isModalOpen">
-      <!-- El contenido del modal se mantiene igual -->
-      <ng-template> 
-        <ion-header>
-          <ion-toolbar>
-            <ion-title>Términos y condiciones</ion-title>
-            <ion-buttons slot="end">
-              <ion-button class="cerrar" (click)="setOpen(false)">
-                <ion-icon class="icon-boton" size="large" name="close"></ion-icon> Cerrar
-              </ion-button>
-            </ion-buttons>
-          </ion-toolbar>
-        </ion-header>
-        <ion-content class="ion-padding">
-          <!-- Contenido de términos y condiciones se mantiene -->
-        </ion-content>
-      </ng-template>
-    </ion-modal>
-    <ion-button class="boton" expand="block" (click)="presentLogoutAlert()">
-      <ion-icon slot="start" name="log-out-outline"></ion-icon>
-      Cerrar sesión
-    </ion-button><br>
-  </div>
+  <ion-avatar>
+    <img alt="Avatar" [src]="user.image_url || 'https://www.pngkey.com/png/full/114-1149878_setting-user-avatar-in-specific-size-without-breaking.png'" />
+  </ion-avatar><br>
+  <ion-item>
+    <ion-icon aria-hidden="true" name="person-outline" slot="start"></ion-icon>
+    <ion-label>
+      <h2>Nombre</h2>
+      <p>{{ user.name || 'No disponible' }}</p>
+    </ion-label>
+  </ion-item>  
+  <ion-item>
+    <ion-icon aria-hidden="true" name="mail-outline" slot="start"></ion-icon>
+    <ion-label>
+      <h2>Correo electrónico</h2>
+      <p>{{ user.email || 'No disponible' }}</p>
+    </ion-label>
+  </ion-item> 
+  <ion-item>
+    <ion-icon aria-hidden="true" name="call-outline" slot="start"></ion-icon>
+    <ion-label>
+      <h2>Teléfono celular</h2>
+      <p>{{ user.phone || 'No disponible' }}</p>
+    </ion-label>
+  </ion-item> 
+  <ion-item>
+    <ion-toggle>
+      <ion-label>Recibir notificaciones</ion-label>
+      <ion-note color="medium">Puedes activarlas y desactivarlas cuando quieras</ion-note>
+    </ion-toggle>
+  </ion-item><br>
+  <ion-button class="boton">
+    <ion-icon slot="start" name="pencil-outline"></ion-icon>
+    Editar perfil
+  </ion-button>  
+  <ion-button class="boton" expand="block" (click)="setOpen(true)">
+    <ion-icon name="document-text-outline"></ion-icon>
+    Términos y condiciones
+  </ion-button>
+  <ion-modal [isOpen]="isModalOpen">
+    <ng-template> 
+      <!-- Contenido del modal se mantiene igual -->
+    </ng-template>
+  </ion-modal>
+  <ion-button class="boton" expand="block" (click)="presentLogoutAlert()">
+    <ion-icon slot="start" name="log-out-outline"></ion-icon>
+    Cerrar sesión
+  </ion-button><br>
 </ion-content>

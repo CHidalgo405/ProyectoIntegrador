@@ -15,10 +15,7 @@ export class InicioSesionPage {
   errorMessage: string = '';
   successMessage: string = '';
 
-  constructor(
-    private authService: AuthService,
-    private router: Router // Inyectamos el Router
-  ) {}
+  constructor(private authService: AuthService, private router: Router) {}
 
   onSubmit() {
     this.loading = true;
@@ -31,17 +28,12 @@ export class InicioSesionPage {
           this.loading = false;
           this.successMessage = '¡Login exitoso!';
           console.log('Respuesta completa:', response);
-          // Redirigimos a /tabs/tabs después de un login exitoso
           this.router.navigate(['/tabs']);
         },
         error: (error) => {
           this.loading = false;
           this.errorMessage = 'Error en el login: ' + error.message;
           console.error('Detalles del error:', error);
-        },
-        complete: () => {
-          this.loading = false;
-          console.log('Solicitud completada');
         }
       });
   }

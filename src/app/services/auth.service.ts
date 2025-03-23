@@ -16,13 +16,38 @@ export class AuthService {
       'Content-Type': 'application/json'
     });
     const body = { email, password };
+
     return this.http.post(`${this.apiUrl}/login`, body, { headers }).pipe(
-      tap(response => console.log('Respuesta del servidor:', response)),
+      tap((response: any) => {
+        // Guardamos los datos del usuario en localStorage
+        if (response.data) {
+          localStorage.setItem('userData', JSON.stringify(response.data));
+        }
+      }),
       catchError(error => {
         console.error('Error en la solicitud de login:', error);
         return throwError(() => new Error('Error en el login: ' + error.message));
       })
     );
+  }
+
+  // Nuevo método para obtener datos del usuario por ID
+  getUserById(id: number): Observable<any> {
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json'
+    });
+    return this.http.get(`${this.apiUrl}/usuarios/${id}`, { headers }).pipe(
+      catchError(error => {
+        console.error('Error al obtener datos del usuario:', error);
+        return throwError(() => new Error('Error al obtener usuario: ' + error.message));
+      })
+    );
+  }
+
+  // Método para obtener los datos del usuario desde localStorage
+  getUserData(): any {
+    const userData = localStorage.getItem('userData');
+    return userData ? JSON.parse(userData) : null;
   }
 
   register(name: string, email: string, password: string): Observable<any> {
@@ -31,19 +56,5 @@ export class AuthService {
     });
     const body = { name, email, password };
     return this.http.post(`${this.apiUrl}/usuarios`, body, { headers });
-  }
-
-  // Nuevo método para obtener datos del usuario por ID
-  getUserData(idusuario: string): Observable<any> {
-    const headers = new HttpHeaders({
-      'Content-Type': 'application/json'
-    });
-    return this.http.get(`${this.apiUrl}/usuarios/${idusuario}`, { headers }).pipe(
-      tap(response => console.log('Datos del usuario:', response)),
-      catchError(error => {
-        console.error('Error al obtener datos del usuario:', error);
-        return throwError(() => new Error('Error al obtener datos: ' + error.message));
-      })
-    );
   }
 }

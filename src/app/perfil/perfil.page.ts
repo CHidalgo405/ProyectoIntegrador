@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AlertController } from '@ionic/angular';
-import { AuthService } from '../services/auth.service'; // Ajusta la ruta según tu estructura
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-perfil',
@@ -11,8 +11,7 @@ import { AuthService } from '../services/auth.service'; // Ajusta la ruta según
 })
 export class PerfilPage implements OnInit {
   isModalOpen = false;
-  userData: any = {}; // Para almacenar los datos del usuario
-  loading: boolean = true; // Para mostrar un estado de carga
+  user: any = {}; // Objeto para almacenar los datos del usuario
 
   constructor(
     private router: Router,
@@ -21,28 +20,29 @@ export class PerfilPage implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.loadUserData();
+    // Cargar datos del usuario desde localStorage al iniciar
+    const userData = this.authService.getUserData();
+    if (userData) {
+      this.user = userData;
+    } else {
+      // Opcional: Si no hay datos en localStorage, intentar obtenerlos del servidor
+      this.loadUserData();
+    }
   }
 
+  // Método para cargar datos del usuario desde la API
   loadUserData() {
-    const idusuario = localStorage.getItem('idusuario');
-    if (idusuario) {
-      this.authService.getUserData(idusuario)
-        .subscribe({
-          next: (data) => {
-            this.userData = data; // Guardamos los datos del usuario
-            this.loading = false;
-            console.log('Datos cargados:', this.userData);
-          },
-          error: (error) => {
-            console.error('Error al cargar datos:', error);
-            this.loading = false;
-            this.router.navigate(['/inicio-sesion']); // Redirige si hay error (por ejemplo, sesión expirada)
-          }
-        });
-    } else {
-      this.loading = false;
-      this.router.navigate(['/inicio-sesion']); // Redirige si no hay idusuario
+    const userData = this.authService.getUserData();
+    if (userData && userData.idusuario) {
+      this.authService.getUserById(userData.idusuario).subscribe({
+        next: (response) => {
+          this.user = response.data || response; // Ajusta según la estructura de la respuesta
+          localStorage.setItem('userData', JSON.stringify(this.user)); // Actualizar localStorage
+        },
+        error: (error) => {
+          console.error('Error al cargar datos del usuario:', error);
+        }
+      });
     }
   }
 
@@ -65,7 +65,7 @@ export class PerfilPage implements OnInit {
         }, {
           text: 'Cerrar sesión',
           handler: () => {
-            localStorage.removeItem('idusuario'); // Elimina el idusuario al cerrar sesión
+            localStorage.removeItem('userData'); // Limpiar datos al cerrar sesión
             this.router.navigate(['/inicio-sesion']);
           }
         }
