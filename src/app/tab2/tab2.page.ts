@@ -17,7 +17,7 @@ export class Tab2Page implements OnInit {
     { "imagen": "/assets/imgs/producto_5.jpg", "producname": "Aromatizante Lavanda", "descripcion": "Aromatizante en spray con esencia de lavanda, ideal para crear un ambiente relajante y armonioso. Su fragancia duradera ayuda a neutralizar olores y proporciona una sensación de tranquilidad y bienestar.", "precio": 50.00 },
     { "imagen": "/assets/imgs/producto_6.jpg", "producname": "Aromatizante Cítrico", "descripcion": "Ambientador con fragancia a cítricos que refresca y revitaliza cualquier espacio. Su mezcla de notas de limón, naranja y mandarina ayuda a eliminar malos olores y deja un ambiente limpio y energizante.", "precio": 55.00 },
     { "imagen": "/assets/imgs/producto_7.jpg", "producname": "Aromatizante Vainilla", "descripcion": "Perfume ambiental con aroma a vainilla que envuelve tu hogar u oficina con una fragancia dulce y reconfortante. Su fórmula en spray permite una aplicación fácil y uniforme, dejando un ambiente cálido y acogedor.", "precio": 60.00 },
-    { "imagen": "/assets/imgs/producto_8.jpg", "producname": "Aromatizante Floral", "descripcion": "Fragancia en spray con esencias florales que transforman cualquier espacio en un jardín perfumado. Su fórmula ayuda a eliminar malos olores y proporciona una sensación de frescura y naturalidad.", "precio": 58.00 },
+    { "imagen": "/assets/imgs/producto_8.jpg", "producname": "17Aromatizante Floral", "descripcion": "Fragancia en spray con esencias florales que transforman cualquier espacio en un jardín perfumado. Su fórmula ayuda a eliminar malos olores y proporciona una sensación de frescura y naturalidad.", "precio": 58.00 },
     { "imagen": "/assets/imgs/producto_1.jpg", "producname": "Cloro Espumoso", "descripcion": "Desinfectante de alto poder con espuma activa que facilita la limpieza y desinfección de diversas superficies. Su fórmula elimina gérmenes, bacterias y hongos, dejando un ambiente higiénico y seguro.", "precio": 70.00 },
     { "imagen": "/assets/imgs/producto_2.jpg", "producname": "Cloro Concentrado", "descripcion": "Blanqueador y desinfectante multiusos con una fórmula de alta concentración para una limpieza efectiva. Ideal para eliminar manchas difíciles y desinfectar superficies con máxima eficiencia.", "precio": 65.00 },
     { "imagen": "/assets/imgs/producto_3.jpg", "producname": "Desinfectante Multiusos", "descripcion": "Limpia y elimina bacterias en múltiples superficies con una fórmula efectiva y de rápida acción. Perfecto para la desinfección del hogar, oficinas y áreas de alto contacto, dejando un ambiente fresco y seguro.", "precio": 75.00 },
@@ -36,7 +36,7 @@ export class Tab2Page implements OnInit {
     },
     {
       "imagen": "/assets/imgs/producto_10.jpg",
-      "producname": "Aromatizante Canela",
+      "producname": "Aromatizante Canela 1L",
       "descripcion": "Ambientador con aroma a canela que crea un ambiente cálido y acogedor. Ideal para épocas frías, su fragancia especiada aporta una sensación de confort y bienestar.",
       "precio": 56.00
     },
@@ -60,7 +60,7 @@ export class Tab2Page implements OnInit {
     },
     {
       "imagen": "/assets/imgs/producto_3.jpg",
-      "producname": "Desinfectante para Manos",
+      "producname": "Desinfectante para Manos ",
       "descripcion": "Gel desinfectante con alcohol que elimina el 99.9% de bacterias y virus. Fórmula rápida y efectiva para mantener las manos limpias y protegidas en todo momento.",
       "precio": 35.00
     },
@@ -84,7 +84,7 @@ export class Tab2Page implements OnInit {
     },
     {
       "imagen": "/assets/imgs/producto_7.jpg",
-      "producname": "Aromatizante Lavanda y Vainilla",
+      "producname": "Aromatizante Lavanda y Vainilla 1L",
       "descripcion": "Ambientador con una mezcla relajante de lavanda y vainilla. Perfecto para crear un ambiente tranquilo y acogedor en cualquier espacio.",
       "precio": 57.00
     },
@@ -109,7 +109,7 @@ export class Tab2Page implements OnInit {
       if (event) {
         event.target.complete();
       }
-    }, 250);
+    }, 2500);
   }
 
   async loadMoreProducts() {
