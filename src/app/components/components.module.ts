@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { LayoutComponent } from './layout/layout.component';
 import { CardComponent } from './card/card.component';
 import { IonicModule } from '@ionic/angular';
 
@@ -8,7 +7,6 @@ import { IonicModule } from '@ionic/angular';
 
 @NgModule({
   declarations: [
-    LayoutComponent,
     CardComponent
   ],
   imports: [
@@ -16,7 +14,6 @@ import { IonicModule } from '@ionic/angular';
     IonicModule
   ],
   exports: [
-    LayoutComponent,
     CardComponent
   ]
 })

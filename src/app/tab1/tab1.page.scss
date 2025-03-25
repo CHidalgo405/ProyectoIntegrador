@@ -9,7 +9,6 @@
     transform: translate(-50%, -50%);
 }
 
-
 .toolbar-fondo {
   background: url('/assets/imgs/toolbar.jpeg') no-repeat center center;
   background-size: cover;
@@ -31,15 +30,11 @@ ion-searchbar{
   color: #d6d6d6;
 }
 
-app-card{
-    width: 50%;
-}
-
 ion-icon{
     color: #4A827E;
 }
 
-img{
+.imagen-home{
     width: 95%;
     display: block;
     margin: 0 auto;
@@ -86,4 +81,58 @@ iframe {
     color: #ffffff;
     margin-left: 8px;
     margin-right: 8px;
+}
+
+.carta{
+    width: 100%;
+    background-color: #e5e5e5;
+    border-radius: 10px;
+    margin-left: 0%;
+    margin-right: 0%;
+    margin-top: 5px;
+  }
+
+  .titulo{
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2; /* Muestra hasta 2 líneas */
+    line-clamp: 2; /* Muestra hasta 2 líneas */
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .descripcion{
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2; /* Muestra hasta 2 líneas */
+    line-clamp: 2; /* Muestra hasta 2 líneas */
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .precio{
+    font-size: 22px;
+    color: #4a827e;
+    font-weight: bold;
+  }
+
+  .estrellas{
+    color: #4A827E;
+    margin: 0px;
+}
+
+.imagen-producto{
+    width: 100%;
+    border-radius: 10px 10px 0px 0px;
+}
+
+.boton2{
+    width: 90%;
+    height: 39px;
+    display: block;
+    margin: 0 auto;
+    border-radius: 15px; /* Ajusta este valor para controlar el redondeo */
+    overflow: hidden; /* Asegura que el contenido interno también se ajuste al redondeo */
+    text-align: center;
+    color: #ffffff;
 }

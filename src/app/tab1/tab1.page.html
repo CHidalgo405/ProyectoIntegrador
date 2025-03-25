@@ -8,65 +8,75 @@
     </ion-buttons>
   </ion-toolbar>
   <ion-toolbar>
-    <ion-searchbar show-cancel-button="focus" placeholder="Buscar productos ..." ></ion-searchbar>
+    <ion-searchbar 
+      show-cancel-button="focus" 
+      placeholder="Buscar productos ..." 
+      (ionInput)="searchProducts($event)">
+    </ion-searchbar>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true"><br>
-  <img src="assets/imgs/home-1.jpeg" alt="Product 1" routerLink="/tabs/tab2" /><br> 
-  <ion-segment [(ngModel)]="selectedSegment">
-    <ion-segment-button value="first">
-      <ion-label>Limpieza</ion-label>
-    </ion-segment-button>
-    <ion-segment-button value="second">
-      <ion-label>Aromas</ion-label>
-    </ion-segment-button>
-    <ion-segment-button value="third">
-      <ion-label>Otros</ion-label>
-    </ion-segment-button>
-  </ion-segment>
-  
-  <!-- Limpieza -->
-  <ion-grid *ngIf="selectedSegment === 'first'"> 
-    <ion-row>
-      <app-card imagen="/assets/imgs/producto_9.jpg" producname="Jabón Líquido Antibacterial" descripcion="Jabón líquido con propiedades antibacteriales, ideal para una limpieza profunda y efectiva. Formulado para eliminar gérmenes y bacterias sin resecar la piel, proporcionando una sensación de frescura y protección." [precio]="45.00"></app-card>
-      <app-card imagen="/assets/imgs/producto_10.jpg" producname="Jabón Líquido Neutro" descripcion="Jabón sin fragancia especialmente diseñado para pieles sensibles. Su fórmula suave ayuda a mantener el equilibrio natural de la piel, evitando irritaciones y ofreciendo una limpieza delicada y efectiva." [precio]="40.00"></app-card>
-      <app-card imagen="/assets/imgs/producto_11.jpg" producname="Jabón Líquido Coco" descripcion="Jabón líquido con una fórmula suave y cremosa que limpia profundamente mientras deja la piel hidratada. Su delicioso aroma a coco brinda una experiencia refrescante y tropical en cada uso." [precio]="48.00"></app-card>
-      <app-card imagen="/assets/imgs/producto_12.jpg" producname="Jabón Líquido Almendra" descripcion="Hidratante con fragancia a almendra que proporciona una limpieza delicada y nutritiva. Su fórmula con extracto de almendra deja la piel suave, tersa y con un agradable aroma dulce y envolvente." [precio]="50.00"></app-card>
-    </ion-row>
-  </ion-grid>
-  
-  <!-- Aromas -->
-  <ion-grid *ngIf="selectedSegment === 'second'">
-    <ion-row>
-      <app-card imagen="/assets/imgs/producto_5.jpg" producname="Aromatizante Lavanda" descripcion="Aromatizante en spray con esencia de lavanda, ideal para crear un ambiente relajante y armonioso. Su fragancia duradera ayuda a neutralizar olores y proporciona una sensación de tranquilidad y bienestar." [precio]="50.00"></app-card>
-      <app-card imagen="/assets/imgs/producto_6.jpg" producname="Aromatizante Cítrico" descripcion="Ambientador con fragancia a cítricos que refresca y revitaliza cualquier espacio. Su mezcla de notas de limón, naranja y mandarina ayuda a eliminar malos olores y deja un ambiente limpio y energizante." [precio]="55.00"></app-card>
-      <app-card imagen="/assets/imgs/producto_7.jpg" producname="Aromatizante Vainilla" descripcion="Perfume ambiental con aroma a vainilla que envuelve tu hogar u oficina con una fragancia dulce y reconfortante. Su fórmula en spray permite una aplicación fácil y uniforme, dejando un ambiente cálido y acogedor." [precio]="60.00"></app-card>
-      <app-card imagen="/assets/imgs/producto_8.jpg" producname="Aromatizante Floral" descripcion="Fragancia en spray con esencias florales que transforman cualquier espacio en un jardín perfumado. Su fórmula ayuda a eliminar malos olores y proporciona una sensación de frescura y naturalidad." [precio]="58.00"></app-card>
-    </ion-row>
-  </ion-grid>
-  
-  <!-- Otros -->
-  <ion-grid *ngIf="selectedSegment === 'third'">
-    <ion-row>
-      <app-card imagen="/assets/imgs/producto_1.jpg" producname="Cloro Espumoso" descripcion="Desinfectante de alto poder con espuma activa que facilita la limpieza y desinfección de diversas superficies. Su fórmula elimina gérmenes, bacterias y hongos, dejando un ambiente higiénico y seguro." [precio]="70.00"></app-card>
-      <app-card imagen="/assets/imgs/producto_2.jpg" producname="Cloro Concentrado" descripcion="Blanqueador y desinfectante multiusos con una fórmula de alta concentración para una limpieza efectiva. Ideal para eliminar manchas difíciles y desinfectar superficies con máxima eficiencia." [precio]="65.00"></app-card>
-      <app-card imagen="/assets/imgs/producto_3.jpg" producname="Desinfectante Multiusos" descripcion="Limpia y elimina bacterias en múltiples superficies con una fórmula efectiva y de rápida acción. Perfecto para la desinfección del hogar, oficinas y áreas de alto contacto, dejando un ambiente fresco y seguro." [precio]="75.00"></app-card>
-      <app-card imagen="/assets/imgs/producto_4.jpg" producname="Desinfectante en Aerosol" descripcion="Fácil aplicación y rápida desinfección en cualquier espacio. Su fórmula en aerosol permite una distribución uniforme para eliminar virus, bacterias y malos olores, dejando un ambiente limpio y protegido." [precio]="80.00"></app-card>
-    </ion-row>
-  </ion-grid>
-  
-  <img src="assets/imgs/home-2.jpeg" alt="Product 1" routerLink="/tabs/tab2" /><br> 
-  <ion-row>
-    <app-card imagen="/assets/imgs/producto_3.jpg" producname="Desinfectante Multiusos" descripcion="Limpia y elimina bacterias en múltiples superficies con una fórmula efectiva y de rápida acción. Perfecto para la desinfección del hogar, oficinas y áreas de alto contacto, dejando un ambiente fresco y seguro." [precio]="75.00"></app-card>
-    <app-card imagen="/assets/imgs/producto_7.jpg" producname="Aromatizante Vainilla" descripcion="Perfume ambiental con aroma a vainilla que envuelve tu hogar u oficina con una fragancia dulce y reconfortante. Su fórmula en spray permite una aplicación fácil y uniforme, dejando un ambiente cálido y acogedor." [precio]="60.00"></app-card>
-    <app-card imagen="/assets/imgs/producto_10.jpg" producname="Jabón Líquido Neutro" descripcion="Jabón sin fragancia especialmente diseñado para pieles sensibles. Su fórmula suave ayuda a mantener el equilibrio natural de la piel, evitando irritaciones y ofreciendo una limpieza delicada y efectiva." [precio]="40.00"></app-card>
-    <app-card imagen="/assets/imgs/producto_9.jpg" producname="Jabón Líquido Antibacterial" descripcion="Jabón líquido con propiedades antibacteriales, ideal para una limpieza profunda y efectiva. Formulado para eliminar gérmenes y bacterias sin resecar la piel, proporcionando una sensación de frescura y protección." [precio]="45.00"></app-card>
-  </ion-row><br>
+  <ion-refresher slot="fixed" (ionRefresh)="loadProducts($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
 
-  <ion-button class="boton" routerLink="/tabs/tab2">
-    Ver más productos
-    <ion-icon class="icon-boton" name="arrow-forward-outline"></ion-icon>
-  </ion-button><br>
+  <div *ngIf="loading" class="ion-text-center">
+    <ion-spinner></ion-spinner>
+    <p>Cargando productos...</p>
+  </div>
 
+  <div *ngIf="!loading && errorMessage" class="ion-text-center">
+    <p style="color: red">{{ errorMessage }}</p>
+    <ion-button (click)="loadProducts()">Reintentar</ion-button>
+  </div>
+
+  <!-- Mostrar mensaje si no hay productos y no estamos buscando -->
+  <div *ngIf="!loading && !errorMessage && products.length === 0 && !isSearching" class="ion-text-center">
+    <p>No hay productos disponibles en este momento.</p>
+  </div>
+
+  <!-- Mostrar mensaje si no hay resultados en la búsqueda -->
+  <div *ngIf="!loading && !errorMessage && products.length === 0 && isSearching" class="ion-text-center">
+    <p>No se encontraron productos que coincidan con tu búsqueda.</p>
+  </div>
+
+  <!-- Contenido que se oculta al buscar -->
+  <div *ngIf="!isSearching">
+    <img class="imagen-home" src="assets/imgs/home-1.jpeg" alt="Product 1"/><br> 
+  </div>
+
+  <!-- Lista de productos (visible siempre que haya productos) -->
+  <ion-grid *ngIf="!loading && products.length > 0">
+    <ion-row>
+      <ion-col size="6" size-md="6" size-lg="4" *ngFor="let product of products">
+        <ion-card class="carta">
+          <img class="imagen-producto" [src]="product.image_url || 'https://via.placeholder.com/150'" alt="{{ product.nombre }}" />
+          <ion-card-header>
+            <ion-card-title class="titulo">{{ product.nombre }}</ion-card-title>
+          </ion-card-header>
+          <ion-card-content>
+            <ion-icon class="estrellas" name="star"></ion-icon>
+            <ion-icon class="estrellas" name="star"></ion-icon>
+            <ion-icon class="estrellas" name="star"></ion-icon>
+            <ion-icon class="estrellas" name="star"></ion-icon>
+            <ion-icon class="estrellas" name="star-half"></ion-icon>
+            <p class="descripcion">{{ product.descripcion }}</p>
+            <p class="precio">$ {{ product.preciomenudeo }}</p>
+            <ion-button class="boton2">
+              <ion-icon class="icon-boton" name="cart"></ion-icon>
+            </ion-button>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <!-- Botón que se oculta al buscar -->
+  <div *ngIf="!isSearching">
+    <ion-button class="boton" routerLink="/tabs/tab2">
+      Ver más productos
+      <ion-icon class="icon-boton" name="arrow-forward-outline"></ion-icon>
+    </ion-button><br>
+  </div>
 </ion-content>
