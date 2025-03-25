@@ -52,3 +52,56 @@ iframe {
     --color: white; /* Letras blancas */
     height: 100px; /* Altura */
   }
+
+  ion-card {
+    margin: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  ion-card img {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+  }
+  
+  ion-card-title {
+    font-size: 1.2em;
+  }
+  
+  ion-card-content p {
+    margin: 5px 0;
+  }
+
+  .carta{
+    background-color: #e2e2e2;
+    border-radius: 10px;
+  }
+
+  .titulo{
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2; /* Muestra hasta 2 líneas */
+    line-clamp: 2; /* Muestra hasta 2 líneas */
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .descripcion{
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2; /* Muestra hasta 2 líneas */
+    line-clamp: 2; /* Muestra hasta 2 líneas */
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .precio{
+    font-size: 22px;
+    color: #4a827e;
+    font-weight: bold;
+  }
+
+  .estrellas{
+    color: #4A827E;
+    margin: 0px;
+}

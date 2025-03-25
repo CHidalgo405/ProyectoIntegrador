@@ -12,13 +12,44 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-grid>
+<ion-content [fullscreen]="true" class="ion-padding">
+  <ion-refresher slot="fixed" (ionRefresh)="loadProducts($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+
+  <div *ngIf="loading" class="ion-text-center">
+    <ion-spinner></ion-spinner>
+    <p>Cargando productos...</p>
+  </div>
+
+  <div *ngIf="!loading && errorMessage" class="ion-text-center">
+    <p style="color: red">{{ errorMessage }}</p>
+    <ion-button (click)="loadProducts()">Reintentar</ion-button>
+  </div>
+
+  <div *ngIf="!loading && !errorMessage && products.length === 0" class="ion-text-center">
+    <p>No hay productos disponibles en este momento.</p>
+  </div>
+
+  <ion-grid *ngIf="!loading && products.length > 0">
     <ion-row>
-      <app-card *ngFor="let producto of productos" [imagen]="producto.imagen" [producname]="producto.producname" [descripcion]="producto.descripcion" [precio]="producto.precio"></app-card>
+      <ion-col size="6" size-md="6" size-lg="4" *ngFor="let product of products">
+        <ion-card class="carta">
+          <img [src]="product.image_url || 'https://via.placeholder.com/150'" alt="{{ product.nombre }}" />
+          <ion-card-header>
+            <ion-card-title class="titulo">{{ product.nombre }}</ion-card-title>
+          </ion-card-header>
+          <ion-card-content>
+            <ion-icon class="estrellas" name="star"></ion-icon>
+            <ion-icon class="estrellas" name="star"></ion-icon>
+            <ion-icon class="estrellas" name="star"></ion-icon>
+            <ion-icon class="estrellas" name="star"></ion-icon>
+            <ion-icon class="estrellas" name="star-half"></ion-icon>
+            <p class="descripcion">{{ product.descripcion }}</p>
+            <p class="precio">$ {{ product.preciomenudeo }}</p>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
     </ion-row>
   </ion-grid>
-  <ion-infinite-scroll threshold="300px" (ionInfinite)="loadMore($event)">
-    <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Cargando más productos..."></ion-infinite-scroll-content>
-  </ion-infinite-scroll>
 </ion-content>

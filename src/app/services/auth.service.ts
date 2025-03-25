@@ -11,6 +11,20 @@ export class AuthService {
 
   constructor(private http: HttpClient) { }
 
+  // Método para obtener los productos
+  getProducts(): Observable<any> {
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json'
+    });
+    return this.http.get(`${this.apiUrl}/productos`, { headers }).pipe(
+      tap(response => console.log('Productos obtenidos:', response)),
+      catchError(error => {
+        console.error('Error al obtener productos:', error);
+        return throwError(() => new Error('Error al obtener productos: ' + error.message));
+      })
+    );
+  }
+
   login(email: string, password: string): Observable<any> {
     const headers = new HttpHeaders({
       'Content-Type': 'application/json'
