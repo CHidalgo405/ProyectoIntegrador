@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { ModalController, AlertController } from '@ionic/angular';
-import { CartService } from '/Users/carloshidalgohernandez/ProyectoIntegrador/src/app/services/cart.service';
+import { CartService } from '../../services/cart.service';
 
 @Component({
   selector: 'app-product-modal',

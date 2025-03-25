@@ -31,52 +31,51 @@
     <ion-button (click)="loadProducts()">Reintentar</ion-button>
   </div>
 
-  <!-- Mostrar mensaje si no hay productos y no estamos buscando -->
-  <div *ngIf="!loading && !errorMessage && products.length === 0 && !isSearching" class="ion-text-center">
+  <div *ngIf="!loading && !errorMessage && products.length === 0" class="ion-text-center">
     <p>No hay productos disponibles en este momento.</p>
   </div>
 
-  <!-- Mostrar mensaje si no hay resultados en la búsqueda -->
-  <div *ngIf="!loading && !errorMessage && products.length === 0 && isSearching" class="ion-text-center">
-    <p>No se encontraron productos que coincidan con tu búsqueda.</p>
-  </div>
+  <div *ngIf="!loading && products.length > 0">
+    <!-- Imagen inicial -->
+    <div *ngIf="!isSearching">
+      <img class="imagen-home" src="assets/imgs/home-1.jpeg" alt="Product 1"/><br> 
+    </div>
+    <ion-grid>
+      <ion-row>
+        <ion-col size="6" size-md="6" size-lg="4" *ngFor="let product of products | slice:0:6; let i = index">
+          <ion-card class="carta">
+            <img class="imagen-producto" [src]="product.image_url || 'https://via.placeholder.com/150'" alt="{{ product.nombre }}" />
+            <ion-card-header>
+              <ion-card-title class="titulo">{{ product.nombre }}</ion-card-title>
+            </ion-card-header>
+            <ion-card-content>
+              <ion-icon class="estrellas" name="star"></ion-icon>
+              <ion-icon class="estrellas" name="star"></ion-icon>
+              <ion-icon class="estrellas" name="star"></ion-icon>
+              <ion-icon class="estrellas" name="star"></ion-icon>
+              <ion-icon class="estrellas" name="star-half"></ion-icon>
+              <p class="descripcion">{{ product.descripcion }}</p>
+              <p class="precio">$ {{ product.preciomenudeo }}</p>
+              <ion-button class="boton2">
+                <ion-icon class="icon-boton" name="cart"></ion-icon>
+              </ion-button>
+            </ion-card-content>
+          </ion-card>
+          <!-- Imagen después de cada 4 productos, pero solo hasta el 6 -->
+          <ng-container *ngIf="(i + 1) % 3 === 0 && i !== 5">
+            <div class="imagen-container">
+              <img class="imagen-home" src="assets/imgs/home-2.jpeg" alt="Product Banner" />
+            </div>
+          </ng-container>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </div><br> 
 
-  <!-- Contenido que se oculta al buscar -->
-  <div *ngIf="!isSearching">
-    <img class="imagen-home" src="assets/imgs/home-1.jpeg" alt="Product 1"/><br> 
-  </div>
-
-  <!-- Lista de productos (visible siempre que haya productos) -->
-  <ion-grid *ngIf="!loading && products.length > 0">
-    <ion-row>
-      <ion-col size="6" size-md="6" size-lg="4" *ngFor="let product of products">
-        <ion-card class="carta">
-          <img class="imagen-producto" [src]="product.image_url || 'https://via.placeholder.com/150'" alt="{{ product.nombre }}" />
-          <ion-card-header>
-            <ion-card-title class="titulo">{{ product.nombre }}</ion-card-title>
-          </ion-card-header>
-          <ion-card-content>
-            <ion-icon class="estrellas" name="star"></ion-icon>
-            <ion-icon class="estrellas" name="star"></ion-icon>
-            <ion-icon class="estrellas" name="star"></ion-icon>
-            <ion-icon class="estrellas" name="star"></ion-icon>
-            <ion-icon class="estrellas" name="star-half"></ion-icon>
-            <p class="descripcion">{{ product.descripcion }}</p>
-            <p class="precio">$ {{ product.preciomenudeo }}</p>
-            <ion-button class="boton2">
-              <ion-icon class="icon-boton" name="cart"></ion-icon>
-            </ion-button>
-          </ion-card-content>
-        </ion-card>
-      </ion-col>
-    </ion-row>
-  </ion-grid>
-
-  <!-- Botón que se oculta al buscar -->
   <div *ngIf="!isSearching">
     <ion-button class="boton" routerLink="/tabs/tab2">
       Ver más productos
       <ion-icon class="icon-boton" name="arrow-forward-outline"></ion-icon>
-    </ion-button><br>
+    </ion-button><br> 
   </div>
 </ion-content>

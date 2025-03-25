@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { CartService } from '/Users/carloshidalgohernandez/ProyectoIntegrador/src/app/services/cart.service';
+import { CartService } from '../../services/cart.service';
 import { AlertController, ModalController } from '@ionic/angular';
 import { ProductModalComponent } from '../product-modal/product-modal.component'; // Importa el componente del modal
 
