@@ -9,8 +9,10 @@ import { AuthService } from '../services/auth.service';
 })
 export class Tab2Page implements OnInit {
   products: any[] = [];
+  allProducts: any[] = []; // Copia de los productos originales
   loading: boolean = false;
   errorMessage: string = '';
+  isSearching: boolean = false; // Para rastrear si hay búsqueda activa
 
   constructor(private authService: AuthService) { }
 
@@ -28,14 +30,15 @@ export class Tab2Page implements OnInit {
         this.loading = false;
         console.log('Respuesta completa de la API:', response);
 
-        // Verificamos si la respuesta es un array directamente
         if (Array.isArray(response)) {
-          this.products = response;
+          this.allProducts = response;
+          this.products = [...this.allProducts]; // Mostramos todos inicialmente
         } else if (response && response.data) {
-          // Si la respuesta tiene una propiedad 'data', usamos esa
-          this.products = response.data;
+          this.allProducts = response.data;
+          this.products = [...this.allProducts];
         } else {
           this.products = [];
+          this.allProducts = [];
           this.errorMessage = 'No se encontraron productos en la respuesta';
         }
 
@@ -52,6 +55,26 @@ export class Tab2Page implements OnInit {
           event.target.complete();
         }
       }
+    });
+  }
+
+  // Función para filtrar productos según el texto de búsqueda
+  searchProducts(event: any) {
+    const searchTerm = event.target.value.toLowerCase();
+
+    // Actualizamos el estado de búsqueda
+    this.isSearching = !!searchTerm; // True si hay texto, False si está vacío
+
+    if (!searchTerm) {
+      this.products = [...this.allProducts]; // Restauramos todos los productos
+      return;
+    }
+
+    this.products = this.allProducts.filter(product => {
+      return (
+        product.nombre.toLowerCase().includes(searchTerm) ||
+        (product.descripcion && product.descripcion.toLowerCase().includes(searchTerm))
+      );
     });
   }
 }
