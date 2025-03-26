@@ -1,82 +1,78 @@
-import { Component, AfterViewInit } from '@angular/core';
-import { Router, NavigationExtras } from '@angular/router';
-import { AlertController } from '@ionic/angular';
-import { CartService } from '../services/cart.service';
+import { Component, OnInit, AfterViewInit } from '@angular/core';
+import { CartService, CartItem } from '../services/cart.service';
+import { Router } from '@angular/router';
 
-declare var paypal: any; // Declaramos la variable global para PayPal
+declare let paypal: any; // Declara la variable global de PayPal
 
 @Component({
   selector: 'app-checkout',
   templateUrl: './checkout.page.html',
   styleUrls: ['./checkout.page.scss'],
-  standalone: false,
+  standalone:false
 })
-export class CheckoutPage implements AfterViewInit {
-  customer = { name: '', email: '' };
-  payment = { cardNumber: '', expiry: '', cvv: '' };
-  cart: any[] = [];
+export class CheckoutPage implements OnInit, AfterViewInit {
+  cartItems: CartItem[] = [];
+  total: number = 0;
 
-  constructor(
-    private router: Router, 
-    private cartService: CartService, 
-    private alertController: AlertController
-  ) {}
+  constructor(private cartService: CartService, private router: Router) {}
 
-  async processPayment() {
-    if (this.cart.length === 0) {
-      const alert = await this.alertController.create({
-        header: 'Carrito Vacío',
-        message: 'No puedes realizar una compra sin productos en el carrito.',
-        buttons: ['OK']
-      });
-      await alert.present();
-      return;
-    }
-
-    if (this.customer.name && this.customer.email && this.payment.cardNumber && this.payment.expiry && this.payment.cvv) {
-      const navigationExtras: NavigationExtras = {
-        state: {
-          customer: this.customer,
-          cart: this.cart
-        }
-      };
-      this.cartService.clearCart();
-      this.router.navigate(['/receipt'], navigationExtras);
-    } else {
-      const alert = await this.alertController.create({
-        header: 'Formulario Incompleto',
-        message: 'Por favor, completa todos los campos antes de continuar.',
-        buttons: ['OK']
-      });
-      await alert.present();
-    }
+  ngOnInit() {
+    this.cartItems = this.cartService.getCartItems();
+    this.total = this.cartItems.reduce((sum, item) => sum + item.preciomenudeo * item.cantidad, 0);
   }
 
   ngAfterViewInit() {
-    this.initPayPal();
+    this.loadPaypalScript().then(() => {
+      this.renderPaypalButton();
+    });
   }
 
-  initPayPal() {
-    console.log('Inicializando PayPal');
+  loadPaypalScript(): Promise<void> {
+    return new Promise((resolve) => {
+      const script = document.createElement('script');
+      script.src = 'https://www.paypal.com/sdk/js?client-id=AfgaB210ZrfdnNG37QicLFBzKAZ0q-XHvlszIakX45H98Sm0MiaPSiqVRibAp0raUi_GVNksfitU3e_d&currency=MXN';
+      script.onload = () => resolve();
+      document.body.appendChild(script);
+    });
+  }
+
+  renderPaypalButton() {
     paypal.Buttons({
       createOrder: (data: any, actions: any) => {
         return actions.order.create({
           purchase_units: [{
             amount: {
-              value: '1.00' // Monto a pagar en la moneda configurada (cambiar si es necesario)
-            }
+              value: this.total.toFixed(2),
+              currency_code: 'MXN', // Cambiado a pesos mexicanos
+              breakdown: {
+                item_total: {
+                  value: this.total.toFixed(2),
+                  currency_code: 'MXN'
+                }
+              }
+            },
+            items: this.cartItems.map(item => ({
+              name: item.nombre,
+              unit_amount: {
+                value: item.preciomenudeo.toFixed(2),
+                currency_code: 'MXN'
+              },
+              quantity: item.cantidad.toString()
+            }))
           }]
         });
       },
-      onApprove: async (data: any, actions: any) => {
-        const order = await actions.order.capture();
-        console.log('Pago completado con éxito:', order);
-        alert('Pago realizado con éxito');
+      onApprove: (data: any, actions: any) => {
+        return actions.order.capture().then((details: any) => {
+          alert('Pago realizado con éxito por ' + details.payer.name.given_name + ' en pesos mexicanos');
+          this.cartService.clearCart(); // Limpia el carrito tras el pago
+          this.router.navigate(['/tabs/tab3']); // Redirige al carrito
+        });
       },
       onError: (err: any) => {
         console.error('Error en el pago:', err);
-        alert('Hubo un error con el pago. Inténtalo de nuevo.');
+        alert('Hubo un error al procesar el pago. Intenta de nuevo.');
       }
-    }).render('#paypal-button-container'); // Renderiza el botón en el contenedor
+    }).render('#paypal-button-container');
   }
 }

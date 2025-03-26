@@ -17,10 +17,17 @@
 
 
 <ion-content class="ion-padding"><br>
-  <img class="imagen" src="assets/imgs/tarjeta.jpeg" alt="Tarjeta de crédito" />
-  <ion-item class="texto">
-    <h6>Aqui podras ingresar los detalles de tu tarjeta para poder comprar los productos que tienes en tu carrito.</h6>
-  </ion-item>
-  <br>
-  <div class="paypal" id="paypal-button-container"></div>
+  <h2>Resumen de la Compra</h2>
+  <ion-list>
+    <ion-item *ngFor="let item of cartItems">
+      <ion-label>
+        <h3>{{ item.nombre }}</h3>
+        <p>${{ item.preciomenudeo }} x {{ item.cantidad }}</p>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+  <div class="ion-text-center">
+    <p><strong>Total: ${{ total.toFixed(2) }}</strong></p>
+  </div>
+  <div id="paypal-button-container"></div>
 </ion-content>

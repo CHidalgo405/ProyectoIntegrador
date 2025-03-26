@@ -7,8 +7,9 @@
       </ion-button>
     </ion-buttons>
   </ion-toolbar>
+</ion-header>
 
-  <ion-content [fullscreen]="true" class="ion-padding">
+  <ion-content [fullscreen]="true">
     <div *ngIf="cartItems.length === 0" class="ion-text-center">
       <p>Tu carrito está vacío.</p>
     </div>
@@ -30,12 +31,22 @@
         </section>
         </div>
       </ion-item>
-    </ion-list>
+    </ion-list><br>
   
     <div *ngIf="cartItems.length > 0" class="ion-text-center">
-      <p>Total: ${{ getTotal() }}</p>
       <ion-button class="boton" color="primary" [disabled]="cartItems.length === 0" (click)="clearCart()">
-        <p>Vaciar Carrito</p>
+        <p class="p2">Vaciar Carrito</p>
       </ion-button>
     </div>
-  </ion-content>
+</ion-content>
+
+<ion-footer class="footer">
+  <ion-toolbar>
+    <ion-item>
+      <h3>Total: ${{ getTotal() }}</h3><br>
+      <ion-button class="boton2" [disabled]="cartItems.length === 0" (click)="checkout()">
+        Realizar Compra
+      </ion-button>
+    </ion-item>
+  </ion-toolbar>
+</ion-footer>

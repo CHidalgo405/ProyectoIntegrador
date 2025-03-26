@@ -17,31 +17,8 @@
   color: #000000;
 }
 
-ion-searchbar{
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
 .perfil{
   color: #d6d6d6;
-}
-
-
-ion-icon{
-    color: #000000;
-}
-
-img{
-    width: 95%;
-    display: block;
-    margin: 0 auto;
-}
-
-iframe {
-    display: block;
-    margin: 0 auto;
 }
 
 .boton{
@@ -53,6 +30,10 @@ iframe {
     overflow: hidden; /* Asegura que el contenido interno también se ajuste al redondeo */
     text-align: center;
     color: #ffffff;
+
+    .p2{
+        color: #ffffff;
+    }
 }
 
 .boton2{
@@ -66,6 +47,7 @@ iframe {
     --color: #ffffff;
     margin-right: 17px;
 }
+
 .icon-boton{
     color: #ffffff;
     margin-left: 8px;
@@ -76,6 +58,7 @@ iframe {
     background-color: #ffffff;
     color: #ffffff;
     text-align: center;
+    --margin-bottom: 0px;
 }
 
 .imagen{
@@ -92,6 +75,7 @@ p {
     line-clamp: 1; /* Muestra hasta 2 líneas */
     overflow: hidden;
     text-overflow: ellipsis;
+    color: #000;
 }
 
 .precio{
@@ -135,16 +119,16 @@ p {
 .mas-menos{
     --width: 10px;
     --height: 10px;
-    font-size: 18px;
+    font-size: 20px;
     background-color: #4a827e8b;
-    color: #ffffff;
+    color: #000000;
     border-radius: 30px;
     --padding-start: 8px;
     --padding-end: 8px;
 }
 
 .cantidad{
-    width: 20px;
+    width: 40px;
     height: 20px;
     font-size: 18px;
     font-weight: bold;
