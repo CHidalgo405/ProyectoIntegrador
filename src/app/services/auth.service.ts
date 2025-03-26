@@ -11,7 +11,7 @@ export class AuthService {
 
   constructor(private http: HttpClient) { }
 
-  // Método para obtener los productos
+  // Método para obtener los productos en auth.service.ts
   getProducts(): Observable<any> {
     const headers = new HttpHeaders({
       'Content-Type': 'application/json'

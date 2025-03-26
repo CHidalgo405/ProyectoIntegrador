@@ -1,3 +1,4 @@
+<!-- tab2.page.htnl -->
 <ion-header>
   <ion-toolbar class="toolbar-fondo">
     <ion-title class="titulo-centrado" routerLink="/tabs">POWER CLEAN</ion-title> 
@@ -58,6 +59,9 @@
             <ion-icon class="estrellas" name="star-half"></ion-icon>
             <p class="descripcion">{{ product.descripcion }}</p>
             <p class="precio">$ {{ product.preciomenudeo }}</p>
+            <ion-button class="boton2" (click)="addToCart(product)">
+              <ion-icon class="icon-boton" name="cart"></ion-icon>
+            </ion-button>
           </ion-card-content>
         </ion-card>
       </ion-col>

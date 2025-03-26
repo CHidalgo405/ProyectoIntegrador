@@ -22,10 +22,6 @@ export class CheckoutPage implements AfterViewInit {
     private alertController: AlertController
   ) {}
 
-  ionViewWillEnter() {
-    this.cart = this.cartService.getCart();
-  }
-
   async processPayment() {
     if (this.cart.length === 0) {
       const alert = await this.alertController.create({

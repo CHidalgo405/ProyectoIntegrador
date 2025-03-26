@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../services/auth.service';
+import { CartService } from '../services/cart.service';
+import { ToastController } from '@ionic/angular';
 
 @Component({
   selector: 'app-tab2',
@@ -9,12 +11,16 @@ import { AuthService } from '../services/auth.service';
 })
 export class Tab2Page implements OnInit {
   products: any[] = [];
-  allProducts: any[] = []; // Copia de los productos originales
+  allProducts: any[] = [];
   loading: boolean = false;
   errorMessage: string = '';
-  isSearching: boolean = false; // Para rastrear si hay búsqueda activa
+  isSearching: boolean = false;
 
-  constructor(private authService: AuthService) { }
+  constructor(
+    private authService: AuthService,
+    private cartService: CartService,
+    private toastController: ToastController
+  ) {}
 
   ngOnInit() {
     this.loadProducts();
@@ -76,5 +82,16 @@ export class Tab2Page implements OnInit {
         (product.descripcion && product.descripcion.toLowerCase().includes(searchTerm))
       );
     });
+  }
+
+  async addToCart(product: any) {
+    this.cartService.addToCart(product);
+    const toast = await this.toastController.create({
+      message: `${product.nombre} añadido al carrito exitosamente`,
+      duration: 2000,
+      position: 'middle',
+      color: 'success'
+    });
+    await toast.present();
   }
 }
