@@ -41,12 +41,12 @@ export class CartService {
   }
 
   addToCart(product: any) {
-    const existingItem = this.cartItems.find(item => item.idproducto === product.id);
+    const existingItem = this.cartItems.find(item => item.idproducto === product.idproducto);
     if (existingItem) {
       existingItem.cantidad += 1;
     } else {
       this.cartItems.push({
-        idproducto: product.id,
+        idproducto: product.idproducto,
         nombre: product.nombre,
         image_url: product.image_url || 'https://via.placeholder.com/150',
         preciomenudeo: Number(product.preciomenudeo), // Convertir a número

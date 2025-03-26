@@ -9,26 +9,39 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
-  <ion-card>
-    <ion-card-header>
-      <ion-card-title>¡Gracias por tu compra, {{ customer.name }}!</ion-card-title>
-    </ion-card-header>
+<ion-content class="ion-padding">
+  <div *ngIf="receiptData; else noData">
+    <h2>Gracias por tu compra, {{ receiptData.user.name }}!</h2>
+    <p><strong>Email:</strong> {{ receiptData.user.email }}</p>
+    <p><strong>Fecha:</strong> {{ receiptData.date | date:'medium' }}</p>
 
-    <ion-card-content>
-      <p>Hemos enviado el comprobante a <strong>{{ customer.email }}</strong></p>
-      <h3>Productos:</h3> <br>
-      <ion-list>
-        <ion-item *ngFor="let item of cart">
-          <ion-label>
-            <h2>{{ item.name }}</h2>
-            <p>${{ item.price }}</p>
-          </ion-label>
-        </ion-item>
-      </ion-list><br>
-      <h1>Total: ${{ total }}</h1>
-    </ion-card-content>
-  </ion-card>
+    <h3>Resumen de la Compra</h3>
+    <ion-list>
+      <ion-item *ngFor="let item of receiptData.items">
+        <ion-label>
+          <h3>{{ item.nombre }}</h3>
+          <p>{{ item.cantidad }} x ${{ item.preciomenudeo.toFixed(2) }} = ${{ (item.cantidad * item.preciomenudeo).toFixed(2) }}</p>
+        </ion-label>
+      </ion-item>
+    </ion-list>
 
-  <ion-button expand="full" color="primary" routerLink="/tabs/tab1">Volver al Inicio</ion-button>
+    <div class="ion-text-center">
+      <p><strong>Total: ${{ receiptData.total.toFixed(2) }} MXN</strong></p>
+      <ion-button color="primary" (click)="downloadReceipt()">
+        Descargar Recibo (PDF)
+      </ion-button>
+      <ion-button color="medium" routerLink="/tabs/tab3">
+        Volver al Carrito
+      </ion-button>
+    </div>
+  </div>
+
+  <ng-template #noData>
+    <div class="ion-text-center">
+      <p>No se encontraron datos de compra.</p>
+      <ion-button color="medium" routerLink="/tabs/tab3">
+        Volver al Carrito
+      </ion-button>
+    </div>
+  </ng-template>
 </ion-content>

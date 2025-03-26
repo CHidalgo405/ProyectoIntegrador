@@ -18,10 +18,9 @@ export class CheckoutPage implements OnInit, AfterViewInit {
 
   ngOnInit() {
     this.cartItems = this.cartService.getCartItems();
-    // Asegurarse de que preciomenudeo sea un número
     this.cartItems = this.cartItems.map(item => ({
       ...item,
-      preciomenudeo: Number(item.preciomenudeo) || 0 // Convertir a número, 0 si falla
+      preciomenudeo: Number(item.preciomenudeo) || 0
     }));
     this.total = this.cartItems.reduce((sum, item) => sum + item.preciomenudeo * item.cantidad, 0);
     console.log('Cart Items en Checkout:', this.cartItems);
@@ -29,12 +28,14 @@ export class CheckoutPage implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit() {
-    this.loadPaypalScript().then(() => {
-      this.renderPaypalButton();
-    }).catch(err => {
-      console.error('Error loading PayPal SDK:', err);
-      alert('Error al cargar el SDK de PayPal. Revisa la consola para más detalles.');
-    });
+    this.loadPaypalScript()
+      .then(() => {
+        this.renderPaypalButton();
+      })
+      .catch((err: unknown) => {
+        console.error('Error loading PayPal SDK:', err);
+        alert('Error al cargar el SDK de PayPal. Revisa la consola para más detalles.');
+      });
   }
 
   loadPaypalScript(): Promise<void> {
@@ -46,8 +47,9 @@ export class CheckoutPage implements OnInit, AfterViewInit {
         resolve();
       };
       script.onerror = () => {
-        console.error('Error al cargar el SDK de PayPal');
-        reject('Failed to load PayPal script');
+        const error = new Error('Failed to load PayPal script');
+        console.error('Error al cargar el SDK de PayPal:', error.message);
+        reject(error);
       };
       document.body.appendChild(script);
     });
@@ -62,7 +64,6 @@ export class CheckoutPage implements OnInit, AfterViewInit {
 
     paypal.Buttons({
       createOrder: (data: any, actions: any) => {
-        // Validar que el total no sea 0
         if (this.total <= 0) {
           console.error('El total es 0 o negativo, no se puede crear la orden');
           alert('Error: El total del carrito es 0. Agrega productos válidos.');
@@ -98,17 +99,44 @@ export class CheckoutPage implements OnInit, AfterViewInit {
         return actions.order.create(orderData);
       },
       onApprove: (data: any, actions: any) => {
-        console.log('Pago aprobado:', data);
+        console.log('Pago aprobado, capturando orden:', data);
         return actions.order.capture().then((details: any) => {
-          console.log('Detalles del pago:', details);
-          alert('Pago realizado con éxito por ' + details.payer.name.given_name);
-          this.cartService.clearCart();
-          this.router.navigate(['/tabs/tab3']);
+          console.log('Detalles del pago capturado:', details);
+          if (details.status === 'COMPLETED') {
+            alert('Pago realizado con éxito por ' + details.payer.name.given_name);
+
+            // Preparar datos para el recibo
+            const receiptData = {
+              user: {
+                name: details.payer.name.given_name + ' ' + details.payer.name.surname,
+                email: details.payer.email_address
+              },
+              items: this.cartItems,
+              total: this.total,
+              date: new Date().toISOString()
+            };
+
+            // Limpiar el carrito
+            this.cartService.clearCart();
+
+            // Redirigir a /receipt con los datos
+            this.router.navigate(['/receipt'], { state: receiptData });
+          } else {
+            console.error('El pago no se completó correctamente:', details.status);
+            alert('El pago no se completó. Estado: ' + details.status);
+          }
+        }).catch((err: unknown) => {
+          console.error('Error al capturar el pago:', err);
+          alert('Error al capturar el pago. Revisa la consola para más detalles.');
         });
       },
-      onError: (err: any) => {
-        console.error('Error en el pago:', JSON.stringify(err, null, 2));
+      onError: (err: unknown) => {
+        console.error('Error en el pago:', err);
         alert('Hubo un error al procesar el pago. Revisa la consola para más detalles.');
+      },
+      onCancel: (data: any) => {
+        console.log('Pago cancelado por el usuario:', data);
+        alert('Has cancelado el pago.');
       }
     }).render('#paypal-button-container');
   }

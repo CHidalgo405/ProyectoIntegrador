@@ -87,9 +87,9 @@ async addToCart(product: any) {
     this.cartService.addToCart(product);
     const toast = await this.toastController.create({
       message: `${product.nombre} añadido al carrito exitosamente`,
-      duration: 2000,
-      position: 'bottom',
-      color: 'success'
+      duration: 1500,
+      position: 'middle',
+      cssClass: 'custom-toast' // Clase CSS personalizada
     });
     await toast.present();
   }

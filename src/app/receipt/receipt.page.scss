@@ -22,15 +22,18 @@
   color: #d6d6d6;
 }
 
-
-ion-card{
-    background: #e5e5e5;
+h2, h3 {
+  margin-top: 20px;
 }
 
-ion-item{
-    --background: #e5e5e5;
+ion-list {
+  margin: 10px 0;
 }
 
-ion-list{
-    background: #e5e5e5;
+ion-item {
+  --padding-start: 0;
+}
+
+.ion-text-center {
+  margin-top: 20px;
 }
