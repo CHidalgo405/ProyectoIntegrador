@@ -1,3 +1,4 @@
+// cart.service.ts
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 
@@ -19,7 +20,6 @@ export class CartService {
   cart$ = this.cartSubject.asObservable();
 
   constructor() {
-    // Cargar el carrito desde localStorage al iniciar
     this.loadCartFromLocalStorage();
   }
 
@@ -27,6 +27,11 @@ export class CartService {
     const storedCart = localStorage.getItem('cart');
     if (storedCart) {
       this.cartItems = JSON.parse(storedCart);
+      // Asegurarse de que preciomenudeo sea un número al cargar desde localStorage
+      this.cartItems = this.cartItems.map(item => ({
+        ...item,
+        preciomenudeo: Number(item.preciomenudeo) // Convertir a número
+      }));
       this.cartSubject.next([...this.cartItems]);
     }
   }
@@ -36,20 +41,20 @@ export class CartService {
   }
 
   addToCart(product: any) {
-    const existingItem = this.cartItems.find(item => item.idproducto === product.idproducto);
+    const existingItem = this.cartItems.find(item => item.idproducto === product.id);
     if (existingItem) {
       existingItem.cantidad += 1;
     } else {
       this.cartItems.push({
-        idproducto: product.idproducto,
+        idproducto: product.id,
         nombre: product.nombre,
         image_url: product.image_url || 'https://via.placeholder.com/150',
-        preciomenudeo: product.preciomenudeo,
+        preciomenudeo: Number(product.preciomenudeo), // Convertir a número
         cantidad: 1
       });
     }
     this.cartSubject.next([...this.cartItems]);
-    this.saveCartToLocalStorage(); // Guardar en localStorage
+    this.saveCartToLocalStorage();
   }
 
   updateQuantity(itemId: number, cantidad: number) {
@@ -60,7 +65,7 @@ export class CartService {
       } else {
         item.cantidad = cantidad;
         this.cartSubject.next([...this.cartItems]);
-        this.saveCartToLocalStorage(); // Guardar en localStorage
+        this.saveCartToLocalStorage();
       }
     }
   }
@@ -68,7 +73,7 @@ export class CartService {
   removeItem(itemId: number) {
     this.cartItems = this.cartItems.filter(item => item.idproducto !== itemId);
     this.cartSubject.next([...this.cartItems]);
-    this.saveCartToLocalStorage(); // Guardar en localStorage
+    this.saveCartToLocalStorage();
   }
 
   getCartItems() {
@@ -78,6 +83,6 @@ export class CartService {
   clearCart() {
     this.cartItems = [];
     this.cartSubject.next([...this.cartItems]);
-    this.saveCartToLocalStorage(); // Guardar en localStorage
+    this.saveCartToLocalStorage();
   }
 }
