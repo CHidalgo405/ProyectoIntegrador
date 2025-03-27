@@ -6,13 +6,19 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./tab4.page.scss'],
   standalone: false,
 })
-export class Tab4Page implements OnInit {
 
-  selectedSegment: string = 'first'; // Selecciona la pestaña por defecto
+export class Tab4Page {
 
-  constructor() { }
-
-  ngOnInit() {
+  getStatusColor(status: string): string {
+    switch (status) {
+      case 'entregado':
+        return 'success';
+      case 'en camino':
+        return 'warning';
+      case 'en tienda':
+        return 'primary';
+      default:
+        return 'medium';
+    }
   }
-
 }

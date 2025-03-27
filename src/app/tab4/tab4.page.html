@@ -10,195 +10,63 @@
 </ion-header>
 
 <ion-content class="envios-historial-container">
+  <ion-list>
 
-  <ion-segment [(ngModel)]="selectedSegment">
-    <ion-segment-button value="first">
-      <ion-label>Envios pendientes</ion-label>
-    </ion-segment-button>
-    <ion-segment-button value="second">
-      <ion-label>Envios recibidos</ion-label>
-    </ion-segment-button>
-
-  </ion-segment>
-  
-  <!-- Limpieza -->
-  <ion-grid *ngIf="selectedSegment === 'first'"> 
-
-    <section class="envios">
-      <ion-card>
-        <ion-card-header>
-          <ion-card-title>Detalles de Envío</ion-card-title>
-        </ion-card-header>
-        <ion-card-content>
-          <div class="envio-detail">
-            <div class="envio-detail-item">
-              <span class="label">Dirección:</span>
-              <span class="value">Calle Ficticia 123, Veracruz</span>
-            </div>
-            <div class="envio-detail-item">
-              <span class="label">Método de Envío:</span>
-              <span class="value">Envío estándar</span>
-            </div>
-            <div class="envio-detail-item">
-              <span class="label">Fecha de Envío:</span>
-              <span class="value">25 de Febrero, 2025</span>
-            </div>
-            <div class="envio-detail-item">
-              <span class="label">Estado:</span>
-              <span class="value">En tránsito</span>
-            </div>
-          </div>
-        </ion-card-content>
-      </ion-card>
-    </section>
-  
-  </ion-grid>
-  
-  <!-- Aromas -->
-  <ion-grid *ngIf="selectedSegment === 'second'">
-    
-      <!-- Sección de Historial de Compras -->
-  <section class="historial">
-    <ion-card>
+    <ion-card class="purchase-card">
       <ion-card-header>
-        <ion-card-title>Historial de Compras</ion-card-title>
+        <ion-card-subtitle>Fecha: 10/03/2025</ion-card-subtitle>
+        <ion-card-title>Compra #12343</ion-card-title>
       </ion-card-header>
       <ion-card-content>
-        <div class="historial-item">
-          <div class="historial-info">
-            <span class="historial-label">Producto:</span>
-            <span class="historial-value">Aromatizante X</span>
-          </div>
-          <div class="historial-info">
-            <span class="historial-label">Fecha:</span>
-            <span class="historial-value">10 de Febrero, 2025</span>
-          </div>
-          <div class="historial-info">
-            <span class="historial-label">Estado:</span>
-            <span class="historial-value">Entregado</span>
-          </div>
-        </div>
-        <div class="historial-item">
-          <div class="historial-info">
-            <span class="historial-label">Producto:</span>
-            <span class="historial-value">Limpiador multiusos Y</span>
-          </div>
-          <div class="historial-info">
-            <span class="historial-label">Fecha:</span>
-            <span class="historial-value">15 de Febrero, 2025</span>
-          </div>
-          <div class="historial-info">
-            <span class="historial-label">Estado:</span>
-            <span class="historial-value">Pendiente</span>
-          </div>
-        </div>
-      </ion-card-content>
-    </ion-card><br>
-
-    <ion-card>
-      <ion-card-content>
-        <div class="historial-item">
-          <div class="historial-info">
-            <span class="historial-label">Producto:</span>
-            <span class="historial-value">Aromatizante X</span>
-          </div>
-          <div class="historial-info">
-            <span class="historial-label">Fecha:</span>
-            <span class="historial-value">10 de Febrero, 2025</span>
-          </div>
-          <div class="historial-info">
-            <span class="historial-label">Estado:</span>
-            <span class="historial-value">Entregado</span>
-          </div>
-        </div>
-        <div class="historial-item">
-          <div class="historial-info">
-            <span class="historial-label">Producto:</span>
-            <span class="historial-value">Limpiador multiusos Y</span>
-          </div>
-          <div class="historial-info">
-            <span class="historial-label">Fecha:</span>
-            <span class="historial-value">15 de Febrero, 2025</span>
-          </div>
-          <div class="historial-info">
-            <span class="historial-label">Estado:</span>
-            <span class="historial-value">Pendiente</span>
-          </div>
-        </div>
-      </ion-card-content>
-    </ion-card><br>
-
-    <ion-card>
-      <ion-card-content>
-        <div class="historial-item">
-          <div class="historial-info">
-            <span class="historial-label">Producto:</span>
-            <span class="historial-value">Aromatizante X</span>
-          </div>
-          <div class="historial-info">
-            <span class="historial-label">Fecha:</span>
-            <span class="historial-value">10 de Febrero, 2025</span>
-          </div>
-          <div class="historial-info">
-            <span class="historial-label">Estado:</span>
-            <span class="historial-value">Entregado</span>
-          </div>
-        </div>
-        <div class="historial-item">
-          <div class="historial-info">
-            <span class="historial-label">Producto:</span>
-            <span class="historial-value">Limpiador multiusos Y</span>
-          </div>
-          <div class="historial-info">
-            <span class="historial-label">Fecha:</span>
-            <span class="historial-value">15 de Febrero, 2025</span>
-          </div>
-          <div class="historial-info">
-            <span class="historial-label">Estado:</span>
-            <span class="historial-value">Pendiente</span>
-          </div>
-        </div>
-      </ion-card-content>
-    </ion-card><br>
-
-    <ion-card>
-      <ion-card-content>
-        <div class="historial-item">
-          <div class="historial-info">
-            <span class="historial-label">Producto:</span>
-            <span class="historial-value">Aromatizante X</span>
-          </div>
-          <div class="historial-info">
-            <span class="historial-label">Fecha:</span>
-            <span class="historial-value">10 de Febrero, 2025</span>
-          </div>
-          <div class="historial-info">
-            <span class="historial-label">Estado:</span>
-            <span class="historial-value">Entregado</span>
-          </div>
-        </div>
-        <div class="historial-item">
-          <div class="historial-info">
-            <span class="historial-label">Producto:</span>
-            <span class="historial-value">Limpiador multiusos Y</span>
-          </div>
-          <div class="historial-info">
-            <span class="historial-label">Fecha:</span>
-            <span class="historial-value">15 de Febrero, 2025</span>
-          </div>
-          <div class="historial-info">
-            <span class="historial-label">Estado:</span>
-            <span class="historial-value">Pendiente</span>
-          </div>
-        </div>
+        <ion-item lines="none">
+          <ion-label>
+            <h3>Resumen de productos</h3>
+            <p>Jabón líquido (1L) - 4 unidades</p>
+          </ion-label>
+        </ion-item>
+        <ion-chip [color]="getStatusColor('en tienda')">
+          <ion-label>En tienda</ion-label>
+        </ion-chip>
       </ion-card-content>
     </ion-card>
-  </section>
 
-  </ion-grid>
-  
+    <ion-card class="purchase-card">
+      <ion-card-header>
+        <ion-card-subtitle>Fecha: 15/03/2025</ion-card-subtitle>
+        <ion-card-title>Compra #12344</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <ion-item lines="none">
+          <ion-label>
+            <h3>Resumen de productos</h3>
+            <p>Cloro (5L) - 1 unidad</p>
+            <p>Desinfectante (500ml) - 3 unidades</p>
+          </ion-label>
+        </ion-item>
+        <ion-chip [color]="getStatusColor('en camino')">
+          <ion-label>En camino</ion-label>
+        </ion-chip>
+      </ion-card-content>
+    </ion-card>
 
-
-
-  
+    <ion-card class="purchase-card">
+      <ion-card-header>
+        <ion-card-subtitle>Fecha: 20/03/2025</ion-card-subtitle>
+        <ion-card-title>Compra #12345</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <ion-item lines="none">
+          <ion-label>
+            <h3>Resumen de productos</h3>
+            <p>Cloro (2L) - 2 unidades</p>
+            <p>Detergente líquido (1L) - 1 unidad</p>
+          </ion-label>
+        </ion-item>
+        <ion-chip [color]="getStatusColor('entregado')">
+          <ion-label>Entregado</ion-label>
+        </ion-chip>
+      </ion-card-content>
+    </ion-card>
+    
+  </ion-list>
 </ion-content>

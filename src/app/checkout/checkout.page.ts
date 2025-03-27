@@ -1,6 +1,7 @@
 import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { CartService, CartItem } from '../services/cart.service';
 import { Router } from '@angular/router';
+import { AuthService } from '../services/auth.service';
 
 declare let paypal: any;
 
@@ -13,10 +14,19 @@ declare let paypal: any;
 export class CheckoutPage implements OnInit, AfterViewInit {
   cartItems: CartItem[] = [];
   total: number = 0;
+  user: any = {}; // Objeto para almacenar los datos del usuario
 
-  constructor(private cartService: CartService, private router: Router) {}
+  constructor(private cartService: CartService, private router: Router, private authService: AuthService) {}
 
   ngOnInit() {
+    // Cargar datos del usuario desde localStorage al iniciar
+    const userData = this.authService.getUserData();
+    if (userData) {
+      this.user = userData;
+    } else {
+      // Opcional: Si no hay datos en localStorage, intentar obtenerlos del servidor
+      this.loadUserData();
+    }
     this.cartItems = this.cartService.getCartItems();
     this.cartItems = this.cartItems.map(item => ({
       ...item,
@@ -139,5 +149,21 @@ export class CheckoutPage implements OnInit, AfterViewInit {
         alert('Has cancelado el pago.');
       }
     }).render('#paypal-button-container');
+  }
+
+  // Método para cargar datos del usuario desde la API
+  loadUserData() {
+    const userData = this.authService.getUserData();
+    if (userData && userData.idusuario) {
+      this.authService.getUserById(userData.idusuario).subscribe({
+        next: (response) => {
+          this.user = response.data || response; // Ajusta según la estructura de la respuesta
+          localStorage.setItem('userData', JSON.stringify(this.user)); // Actualizar localStorage
+        },
+        error: (error) => {
+          console.error('Error al cargar datos del usuario:', error);
+        }
+      });
+    }
   }
 }

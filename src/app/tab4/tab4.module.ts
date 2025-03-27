@@ -12,7 +12,7 @@ import { ExploreContainerComponentModule } from '../explore-container/explore-co
     FormsModule,
     IonicModule,
     Tab4PageRoutingModule,
-    ExploreContainerComponentModule
+    ExploreContainerComponentModule,
   ],
   declarations: [Tab4Page]
 })

@@ -16,8 +16,19 @@
 </ion-header>
 
 
-<ion-content class="ion-padding"><br>
-  <h2>Resumen de la Compra</h2>
+<ion-content class="ion-padding">
+  <h2>Detalles de envio</h2>
+  <ion-item>
+    <ion-icon aria-hidden="true" name="location-outline" slot="start"></ion-icon>
+    <ion-label>
+      <h2>Dirección</h2>
+      <p>{{ user.direccion || 'No tiene ninguna dirección asignada, favor de agregar una en el apartado de perfil' }}</p>
+    </ion-label>
+  </ion-item><br>
+  <ion-button routerLink="/perfil" class="boton">modificar dirección
+    <ion-icon class="icono" name="brush"></ion-icon>
+  </ion-button><br>
+  <h2 class="ion-text-center">Resumen de la Compra</h2>
   <ion-list>
     <ion-item *ngFor="let item of cartItems">
       <ion-label>
