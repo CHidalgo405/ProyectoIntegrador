@@ -18,8 +18,8 @@ export class AppComponent {
   // Cada vez que se incia la app, se cargan estos valores
   initializeApp() {
     this.platform.ready().then(() => {
-      StatusBar.setOverlaysWebView({ overlay: false }); // evita el toolbar se desplace hasta la barra de estado
-      StatusBar.setBackgroundColor({ color: '#4A827E' }); // cambia el color de la barra de estado
+      StatusBar.setOverlaysWebView({ overlay: false }); 
+      StatusBar.setBackgroundColor({ color: '#4A827E' }); 
     });
   }
 }

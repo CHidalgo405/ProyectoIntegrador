@@ -44,7 +44,7 @@
     <ion-grid>
       <ion-row>
         <ion-col size="6" size-md="6" size-lg="4" *ngFor="let product of products | slice:0:6; let i = index">
-          <ion-card class="carta">
+          <ion-card (click)="openProductModal(product)" class="product-card carta">
             <img class="imagen-producto" [src]="product.image_url || 'https://via.placeholder.com/150'" alt="{{ product.nombre }}" />
             <ion-card-header>
               <ion-card-title class="titulo">{{ product.nombre }}</ion-card-title>

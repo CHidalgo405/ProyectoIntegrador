@@ -9,18 +9,18 @@
   </ion-toolbar>
   <ion-toolbar>
     <ion-buttons slot="start">
-      <ion-button (click)="closeModal()">
+      <ion-button (click)="dismiss()">
         <ion-icon color="primary" size="large" name="arrow-back-outline"></ion-icon>
       </ion-button>
     </ion-buttons>
-    <ion-title class="titulo-secundario">{{producname}}</ion-title>
+    <ion-title class="titulo-secundario">{{ product.nombre }}</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
   <div class="content"><br>
-  <img class="imagen" [src]="imagen" alt="{{producname}}" />
-  <h1>{{producname}}</h1>
+  <img class="imagen" [src]="product.image_url || 'https://via.placeholder.com/150'" alt="{{ product.nombre }}" />
+  <h1>{{ product.nombre }}</h1>
   <p>
     <ion-icon class="estrellas" name="star"></ion-icon>
     <ion-icon class="estrellas" name="star"></ion-icon>
@@ -29,7 +29,7 @@
     <ion-icon class="estrellas" name="star-half"></ion-icon>
   </p>
   <h3>Descripción:</h3>
-  <p>{{descripcion}}</p>
+  <p>{{ product.descripcion || 'No hay descripción disponible.' }}</p>
   <h3>Reseñas:</h3>
   <ion-list [inset]="true">
 
@@ -73,10 +73,10 @@
 <ion-footer><br>
   <ion-row>
     <div class="div-total1">
-      <h1 class="precio">$ {{precio}}</h1>
+      <h1 class="precio">$ {{ product.preciomenudeo || 'N/A' }}</h1>
     </div>
     <div class="div-total2">
-      <ion-button class="boton" slot="end" size="default" (click)="addToCart($event)">
+      <ion-button class="botonc" (click)="addToCart(product)" size="default">
         Agregar al carrito
         <ion-icon class="icon-boton" name="cart"></ion-icon>
       </ion-button>

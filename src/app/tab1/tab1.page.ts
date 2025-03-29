@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../services/auth.service';
 import { CartService } from '../services/cart.service';
 import { ToastController } from '@ionic/angular';
+import { ModalController } from '@ionic/angular';
+import { ProductModalComponent } from '../components/product-modal/product-modal.component';
 
 @Component({
   selector: 'app-tab1',
@@ -19,7 +21,8 @@ export class Tab1Page implements OnInit {
   constructor(
     private authService: AuthService,
     private cartService: CartService,
-    private toastController: ToastController
+    private toastController: ToastController,
+    private modalController: ModalController
   ) {}
 
   ngOnInit() {
@@ -92,5 +95,15 @@ async addToCart(product: any) {
       cssClass: 'custom-toast' // Clase CSS personalizada
     });
     await toast.present();
+  }
+
+  async openProductModal(product: any) {
+    const modal = await this.modalController.create({
+      component: ProductModalComponent,
+      componentProps: {
+        product: product
+      }
+    });
+    await modal.present();
   }
 }
